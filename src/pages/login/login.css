@@ -23,7 +23,7 @@
 .container-logo img{
     width: 100px;
 }
-.form-floating{
+.login .form-floating{
     width: 80%;
     margin: 10px;
 }
@@ -35,6 +35,10 @@
 
 .container-button-login{
     padding: 15px 0px 2px 0px;
+}
+
+.container-login .errores{
+    margin-bottom: 0px;
 }
 @media (min-width: 450px){
     .container-login{
