@@ -11,14 +11,14 @@ const validateForm = (input) => {
       errors.email = 'La información ingresada no es un correo'
     }
   }
-  if (!input.password_one.trim()) {
-    errors.password_one = 'El campo contraseña es requerido'
+  if (!input.password.trim()) {
+    errors.password = 'El campo contraseña es requerido'
   } else {
-    if (!expresiones.txtPassword.test(input.password_one)) {
-      errors.password_one = 'La contraseña debe tener minimo 6 caracteres'
+    if (!expresiones.txtPassword.test(input.password)) {
+      errors.password = 'La contraseña debe tener minimo 6 caracteres'
     }
-    if (input.password_two != input.password_one) {
-      errors.password_one = 'Las contraseñas no coinciden'
+    if (input.password_two != input.password) {
+      errors.password = 'Las contraseñas no coinciden'
     }
   }
   if (!input.firstName.trim()) {

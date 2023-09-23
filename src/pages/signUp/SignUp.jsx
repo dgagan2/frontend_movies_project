@@ -1,9 +1,9 @@
-import logo from '../../assets/logo.png'
 import './signup.css'
 import { Link } from 'react-router-dom'
 import useForm from '../../hooks/useForms'
 import { useState, useEffect } from 'react'
 import validateForm from './validateFormSingUp'
+import Logo from '../../components/Logo'
 const SignUp = () => {
   const [errorsRegitrerUser, setErrorsRegitrerUser] = useState({})
   const sendData = () => {
@@ -12,7 +12,7 @@ const SignUp = () => {
   }
   const { input, handleSubmit, handleInputChange } = useForm(sendData, {
     email: '',
-    password_one: '',
+    password: '',
     password_two: '',
     firstName: '',
     lastName: '',
@@ -24,11 +24,7 @@ const SignUp = () => {
   return (
     <>
       <main className='container-sign-up'>
-        <div className='container-logo'>
-          <img src={logo} alt='' />
-          <h1>Oura Movie</h1>
-        </div>
-
+        <Logo />
         <div className='row g-5 d-flex justify-content-center'>
           <div className='col-md-7 col-lg-8'>
             <h3 className='mb-3 text-center'>Registrarte</h3>
@@ -59,12 +55,12 @@ const SignUp = () => {
                 </div>
 
                 <div className='col-sm-6'>
-                  <label htmlFor='password_one' className='form-label'>Contraseña<span className='text-muted'>(Obligatorio)</span></label>
+                  <label htmlFor='password' className='form-label'>Contraseña<span className='text-muted'>(Obligatorio)</span></label>
                   <input
-                    type='password' className='form-control' id='password_one' placeholder='numeros-caracteres-mayusculas(Ejemplo:&GwkBYZ3)'
-                    value={input.password_one} onChange={handleInputChange} name='password_one'
+                    type='password' className='form-control' id='password' placeholder='numeros-caracteres-mayusculas(Ejemplo:&GwkBYZ3)'
+                    value={input.password} onChange={handleInputChange} name='password'
                   />
-                  {errorsRegitrerUser.password_one && <p className='errores'>{errorsRegitrerUser.password_one}</p>}
+                  {errorsRegitrerUser.password && <p className='errores'>{errorsRegitrerUser.password}</p>}
                 </div>
 
                 <div className='col-sm-6'>
@@ -73,7 +69,7 @@ const SignUp = () => {
                     type='password' className='form-control' id='password_two' placeholder='numeros-caracteres-mayusculas(Ejemplo:&GwkBYZ3)'
                     value={input.password_two} onChange={handleInputChange} name='password_two'
                   />
-                  {errorsRegitrerUser.password_one && <p className='errores'>{errorsRegitrerUser.password_one}</p>}
+                  {errorsRegitrerUser.password && <p className='errores'>{errorsRegitrerUser.password}</p>}
                 </div>
 
                 <div className='col-sm-6'>
