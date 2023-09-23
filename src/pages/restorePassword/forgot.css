@@ -1,0 +1,27 @@
+.container-forgot-password{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Mooli', sans-serif;
+    
+}
+
+.container-form-forgot-password{
+    background-color: white;
+    padding: 50px;
+    border-radius: 20px;
+}
+.container-form-forgot-password h3{
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.container-form-forgot-password div{
+    margin: 0px 15px 10px 15px;
+}
+.container-form-forgot-password button, .container-form-forgot-passwor a{
+    font-size: 18px;
+    margin: 5px 0px 10px 0px;
+}
