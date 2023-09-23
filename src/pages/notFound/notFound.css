@@ -1,0 +1,36 @@
+.container-page-not-found{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to top, #414345, #232526);
+    color: white;
+}
+
+.container-page-not-found h1{
+    font-size: 3.5rem;
+}
+.status-code{
+    color: dodgerblue;
+}
+.container-page-not-found .status-code{
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.container-page-not-found .message{
+    font-size: 22px;
+}
+
+.container-page-not-found .btn{
+    font-size: 22px;
+    padding: 10px 25px 10px 25px;
+    margin: 5px;
+}
+
+.container-page-not-found div{    text-align: center!important;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../../assets/logo.png'
 import './login.css'
+import { Link } from 'react-router-dom'
 const Login = () => {
   return (
     <>
@@ -12,8 +13,8 @@ const Login = () => {
           </div>
           <form action='' className='form-floating'>
 
-            <h3>Inicia Sesión</h3>
-            <div className='form-login'>
+            <h2 className='text-center'>Inicia Sesión</h2>
+            <div className='form-login d-flex flex-column gap-2'>
               <label htmlFor=''>Usuario</label>
               <input type='text' className='form-control' />
               <label htmlFor=''>Contraseña</label>
@@ -25,7 +26,7 @@ const Login = () => {
 
           </form>
           <b>¿Primera vez en Oura Movie?</b>
-          <a href=''>Regístrese</a>
+          <Link to='/account/registration'>Regístrese</Link>
         </article>
       </main>
     </>
