@@ -16,43 +16,87 @@ const initialState = {
 // Registar Usuario
 export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
   try {
-    return await authService.register(user)
+    const response = await authService.register(user)
+    return response
   } catch (error) {
-    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toSring()
+    const message = error.response.data
     return thunkAPI.rejectWithValue(message) // Se retorna el error con el metodo reject
   }
 })
 
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+  try {
+    const response = await authService.login(user)
+    return response
+  } catch (error) {
+    const message = error.response.data
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const changePassword = createAsyncThunk('auth/changePassword', async (user, thunkAPI) => {
+  try {
+    const response = await authService.forgotPassword(user)
+    return response
+  } catch (error) {
+    const message = error.response.data
+    return thunkAPI.rejectWithValue(message)
+  }
+})
 // Se crea el slice
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     reset: (state) => {
+      state.isLoading = false
       state.isError = false
       state.isSuccess = false
-      state.isLoading = false
       state.message = ''
-    },
-    extraReducers: (builder) => {
-      builder
-        .addcase(register.pending, (state) => {
-          // Si esta pendiente
-          state.isLoading = true
-        })
-        .addcase(register.fulfilled, (state, action) => {
-          // Si fue exitosa
-          state.isLoading = false
-          state.isSuccess = true
-          state.user = action.payload
-        })
-        .addcase(register.rejected, (state, action) => {
-          state.isLoading = false
-          state.isError = true
-          state.message = action.payload
-          state.user = null
-        })
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.user = null
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.user = null
+      })
+      .addCase(changePassword.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.user = null
+      })
   }
 })
 

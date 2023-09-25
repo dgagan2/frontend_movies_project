@@ -1,26 +1,58 @@
 import './signup.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useForm from '../../hooks/useForms'
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { register, reset } from '../../features/auth/authSlice'
 import validateForm from './validateFormSingUp'
 import Logo from '../../components/Logo'
+import Spinner from '../../components/Spinner'
+
 const SignUp = () => {
   const [errorsRegitrerUser, setErrorsRegitrerUser] = useState({})
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message.message)
+    }
+
+    if (isSuccess || user) {
+      toast.success('Usuario creado', { autoClose: 1000, hideProgressBar: false })
+      setTimeout(() => {
+        navigate('/')
+      }, 100)
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
   const sendData = () => {
     const newErros = validateForm(input)
     setErrorsRegitrerUser(newErros)
+    if (Object.keys(newErros).length === 0) {
+      dispatch(register(input))
+    }
   }
   const { input, handleSubmit, handleInputChange } = useForm(sendData, {
     email: '',
     password: '',
     password_two: '',
-    firstName: '',
+    firstname: '',
     lastName: '',
     age: '',
     phone_number: '',
     street: '',
     city: ''
   })
+
+  if (isLoading) {
+    return <Spinner />
+  }
   return (
     <>
       <main className='container-sign-up'>
@@ -31,9 +63,9 @@ const SignUp = () => {
             <form className='needs-validation' onSubmit={handleSubmit}>
               <div className='row g-3'>
                 <div className='col-sm-6'>
-                  <label htmlFor='firstName' className='form-label'>Nombres<span className='text-muted'>(Obligatorio)</span></label>
-                  <input type='text' className='form-control' id='firstName' value={input.firstName} onChange={handleInputChange} name='firstName' />
-                  {errorsRegitrerUser.firstName && <p className='errores'>{errorsRegitrerUser.firstName}</p>}
+                  <label htmlFor='firstname' className='form-label'>Nombres<span className='text-muted'>(Obligatorio)</span></label>
+                  <input type='text' className='form-control' id='firstname' value={input.firstname} onChange={handleInputChange} name='firstname' />
+                  {errorsRegitrerUser.firstname && <p className='errores'>{errorsRegitrerUser.firstname}</p>}
                 </div>
 
                 <div className='col-sm-6'>
@@ -57,7 +89,7 @@ const SignUp = () => {
                 <div className='col-sm-6'>
                   <label htmlFor='password' className='form-label'>Contraseña<span className='text-muted'>(Obligatorio)</span></label>
                   <input
-                    type='password' className='form-control' id='password' placeholder='numeros-caracteres-mayusculas(Ejemplo:&GwkBYZ3)'
+                    type='password' className='form-control' id='password' placeholder='&GwkBYZ3-numeros-caracteres-mayusculas'
                     value={input.password} onChange={handleInputChange} name='password'
                   />
                   {errorsRegitrerUser.password && <p className='errores'>{errorsRegitrerUser.password}</p>}
@@ -66,7 +98,7 @@ const SignUp = () => {
                 <div className='col-sm-6'>
                   <label htmlFor='password_two' className='form-label'>Contraseña<span className='text-muted'>(Obligatorio)</span></label>
                   <input
-                    type='password' className='form-control' id='password_two' placeholder='numeros-caracteres-mayusculas(Ejemplo:&GwkBYZ3)'
+                    type='password' className='form-control' id='password_two' placeholder='&GwkBYZ3-numeros-caracteres-mayusculas'
                     value={input.password_two} onChange={handleInputChange} name='password_two'
                   />
                   {errorsRegitrerUser.password && <p className='errores'>{errorsRegitrerUser.password}</p>}

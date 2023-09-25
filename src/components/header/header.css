@@ -1,0 +1,35 @@
+.navbar{
+    background-color: #10104e;
+    height: 72px;
+}
+.logo-navbar{
+    width: 50px;
+}
+#dropdownMenuUser {
+    background-color: transparent;
+}
+
+.navbar .button-search{
+    background-color: transparent;
+    border-style: none;
+}
+.button-search img{
+    width: 30px;
+}
+.navbar #navbarTogglerDemo02{
+    margin: 0px 20px;
+}
+
+.navbar .container-fluid{
+    background-color: #10104e;
+}
+.navbar .dropdown{
+    margin: 10px 20px;
+}
+
+@media (min-width: 992px){
+    .navbar{
+        padding: 0px 150px 0px 150px;
+    }
+    
+}

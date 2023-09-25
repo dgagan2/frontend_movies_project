@@ -1,19 +1,34 @@
 import axios from 'axios'
 
-const { API_URL, API_KEY } = import.meta.env
+const { VITE_API_URL, VITE_API_KEY } = import.meta.env
 const config = {
   headers: {
-    api: API_KEY
+    api: VITE_API_KEY
   }
 }
 
 const register = async (input) => {
-  const response = await axios.post(`${API_URL}/account/register`, input, config)
+  const response = await axios.post(`${VITE_API_URL}/account/register`, input, config)
+  return response.data
+}
+
+const login = async (input) => {
+  const response = await axios.post(`${VITE_API_URL}/account/login`, input, config)
+  if (response.data) {
+    sessionStorage.setItem('user', JSON.stringify(response.data))
+  }
+  return response.data
+}
+
+const forgotPassword = async (input) => {
+  const response = await axios.post(`${VITE_API_URL}/account/reset/password`, input, config)
   return response.data
 }
 
 const authService = {
-  register
+  register,
+  login,
+  forgotPassword
 }
 
 export default authService

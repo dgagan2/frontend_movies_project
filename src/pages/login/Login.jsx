@@ -1,23 +1,48 @@
 import React, { useState, useEffect } from 'react'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { login, reset } from '../../features/auth/authSlice'
 import './login.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../components/Logo'
 import useForm from '../../hooks/useForms'
 import validateFormLogin from './validateFormLogIn'
+import Spinner from '../../components/Spinner'
 
 const Login = () => {
   const [errorsLogin, setErrorsLogin] = useState({})
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+  const homeNavigate = useNavigate()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message.message)
+    }
+    if (isSuccess || user) {
+      homeNavigate('/home')
+      setTimeout(() => { alert('Su sesión va a expirar') }, 550000)
+    }
+
+    dispatch(reset())
+  }, [isError, message, homeNavigate, dispatch, user, isSuccess])
+
   const sendData = () => {
     const newErros = validateFormLogin(input)
     setErrorsLogin(newErros)
+    if (Object.keys(newErros).length === 0) {
+      dispatch(login(input))
+    }
   }
   const { input, handleSubmit, handleInputChange } = useForm(sendData, {
     email: '',
     password: ''
   }
   )
-
+  if (isLoading) {
+    return <Spinner />
+  }
   return (
     <>
       <main className='login'>

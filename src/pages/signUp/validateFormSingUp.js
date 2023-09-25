@@ -1,6 +1,8 @@
 const expresiones = {
   txtPassword: /^[a-zA-ZÁáÀàÉéÈèÍíÌìÓóÒòÚúÙùÑñüÜ0-9!@#$%^&.\-_\-.,"';~*?_~+%&#/]{6,20}$/,
-  txtEmail: /^[a-zA-Z0-9_\-.~]{2,}@[a-zA-Z0-9_\-.~]{2,}\.[a-zA-Z]{2,4}$/
+  txtEmail: /^[a-zA-Z0-9_\-.~]{2,}@[a-zA-Z0-9_\-.~]{2,}\.[a-zA-Z]{2,4}$/,
+  txtName: /^[a-zA-ZÁ-ÿ\s]{3,50}$/,
+  txtAge: /^\d{1,2}$/
 }
 const validateForm = (input) => {
   const errors = {}
@@ -21,14 +23,26 @@ const validateForm = (input) => {
       errors.password = 'Las contraseñas no coinciden'
     }
   }
-  if (!input.firstName.trim()) {
-    errors.firstName = 'El campo Nombres es requerido'
+  if (!input.firstname.trim()) {
+    errors.firstname = 'El campo Nombres es requerido'
+  } else {
+    if (!expresiones.txtName.test(input.firstname)) {
+      errors.firstname = 'Nombre no valido'
+    }
   }
   if (!input.lastName.trim()) {
     errors.lastName = 'El campo Apellidos es requerido'
+  } else {
+    if (!expresiones.txtName.test(input.lastName)) {
+      errors.lastName = 'Apellido no valido'
+    }
   }
   if (!input.age.trim()) {
     errors.age = 'El campo Edad es requerido'
+  } else {
+    if (!expresiones.txtAge.test(input.age)) {
+      errors.age = 'Edad no valida'
+    }
   }
 
   return errors
