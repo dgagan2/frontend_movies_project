@@ -18,14 +18,14 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(categoriesNavbar())
-  }, [categories])
+  }, [])
 
   useEffect(() => {
     if (isError) {
       toast.error(message.message || message)
     }
     dispatch(reset())
-  }, [isError, message, dispatch, isSuccess])
+  }, [isError, message, dispatch, isSuccess, categories])
 
   if (isLoading) {
     return <Spinner />
@@ -52,7 +52,7 @@ const Header = () => {
             <input className='form-control me-2' type='search' placeholder='Search' aria-label='Search' />
             <button type='button' className='button-search'><img src={iconSearch} alt='Icono busqueda de peliculas' /></button>
           </form>
-          <div className='d-flex justify-content-around'>
+          <div className='d-flex justify-content-around' id='container-dropdown-user-movies'>
             <DropdownFavorites />
             <DropdownMenuUser />
           </div>

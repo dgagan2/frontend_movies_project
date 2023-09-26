@@ -1,0 +1,11 @@
+
+.carousel-data-movies{
+    position: absolute;
+    color: white;
+    width: 50%;
+    height: 70%;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+
+}

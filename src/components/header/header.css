@@ -22,6 +22,18 @@
 /* Estilos menu  dropdown usuario */
 #dropdownMenuUser {
     background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+    border-style: none;
+}
+#dropdownMenuUser img{
+    width: 35px;
+}
+#dropdown{
+    margin-left: 10px;
+}
+.dropdown-item.disabled{
+    color: black !important;
 }
 /* Estilos menu  dropdown peliulas favorias */
 #dropdownMenuFavorites {
@@ -32,11 +44,12 @@
 }
 
 .button-search img, #dropdownMenuFavorites img{
-    width: 30px;
+    width: 34px;
 }
 
-#dropdownMenuFavorites img{
+#dropdownMenuFavorites img, #dropdownMenuUser img{
     padding-top: 4px;
+    filter: invert(1);
 }
 
 #Container-dropdown-menu-favorites ul{
@@ -81,6 +94,10 @@
     .navbar{
         padding: 0px 150px 0px 150px;
     }
-    
-    
+}
+
+@media (max-width: 992px){
+    #container-dropdown-user-movies{
+        margin: 15px;
+    }
 }

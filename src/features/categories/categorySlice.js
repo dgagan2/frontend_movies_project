@@ -11,8 +11,7 @@ const initialState = {
 
 export const categoriesNavbar = createAsyncThunk('category/menu', async (thunkAPI) => {
   try {
-    const response = await categoryService.getAllCategories()
-    console.log(response)
+    const response = await categoryService.getMenuCategories()
     return response
   } catch (error) {
     const message = error.response.data

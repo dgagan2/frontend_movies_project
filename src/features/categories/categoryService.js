@@ -9,12 +9,12 @@ const config = {
   }
 }
 
-const getAllCategories = async () => {
+const getMenuCategories = async () => {
   const response = await axios.get(`${VITE_API_URL}/movies/genre`, config)
   return response.data
 }
 const categoryService = {
-  getAllCategories
+  getMenuCategories
 }
 
 export default categoryService
