@@ -18,7 +18,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message.message)
+      toast.error(message.message || message)
     }
 
     if (isSuccess || user) {
@@ -128,7 +128,7 @@ const SignUp = () => {
 
               <div className='container-button d-flex'>
                 <button className='w-100 btn btn-primary btn-lg mt-5'>Registrarse</button>
-                <Link className='w-100 btn btn-primary btn-lg mt-5' to='/'>Volver</Link>
+                <Link className='w-100 btn btn-primary btn-lg mt-5' to='/login'>Volver</Link>
               </div>
 
             </form>

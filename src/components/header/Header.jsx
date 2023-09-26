@@ -1,20 +1,35 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react'
 import './header.css'
 import logo from '../../assets/logo.png'
 import iconSearch from '../../assets/search.png'
-import { getAllCategories } from '../../features/categories/categoryService'
 import { Link } from 'react-router-dom'
+import DropdownMenuUser from './DropdownMenuUser'
+import DropdownFavorites from './DropdownFavorites'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { categoriesNavbar, reset } from '../../features/categories/categorySlice'
+
+import Spinner from '../Spinner'
 
 const Header = () => {
-  const user = JSON.parse(sessionStorage.getItem('user'))
-  const [categories, setCategories] = useState([])
-  const handleCategories = async () => {
-    const response = await getAllCategories()
-    setCategories(response)
-  }
+  const { categories, isLoading, isError, isSuccess, message } = useSelector((state) => state.category)
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    handleCategories()
-  }, [])
+    dispatch(categoriesNavbar())
+  }, [categories])
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message.message || message)
+    }
+    dispatch(reset())
+  }, [isError, message, dispatch, isSuccess])
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <nav className='navbar navbar-expand-lg navbar-dark'>
@@ -25,28 +40,23 @@ const Header = () => {
         <img className='logo-navbar' alt='Oura movies logo' src={logo} />
         <div className='collapse navbar-collapse' id='navbarTogglerDemo02'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-            {categories.map((item, index) => (
-
-              <li className='nav-item' key={categories[index]._id}>
-                <Link className='nav-link active' aria-current='page' to=''>{categories[index].name}</Link>
-              </li>
-            ))}
+            {categories
+              ? categories.map((item, index) => (
+                <li className='nav-item' key={categories[index]._id}>
+                  <Link className='nav-link active' aria-current='page' to=''>{categories[index].name}</Link>
+                </li>
+              ))
+              : null}
           </ul>
-          <form className='d-flex' role='search'>
+          <form className='d-flex' role='search' id='input-movie-search'>
             <input className='form-control me-2' type='search' placeholder='Search' aria-label='Search' />
             <button type='button' className='button-search'><img src={iconSearch} alt='Icono busqueda de peliculas' /></button>
           </form>
+          <div className='d-flex justify-content-around'>
+            <DropdownFavorites />
+            <DropdownMenuUser />
+          </div>
 
-        </div>
-        <div className='dropdown'>
-          <button type='button' className='btn btn-secondary dropdown-toggle' data-bs-toggle='dropdown' id='dropdownMenuUser' aria-expanded='false'>
-            {user.name}
-          </button>
-          <ul className='dropdown-menu' aria-labelledby='dropdownMenuUser'>
-            <li><Link className='dropdown-item' to=''>Dashboard</Link></li>
-            <li><Link className='dropdown-item' to=''>Mi perfil</Link></li>
-            <li><Link className='dropdown-item' to=''>Salir</Link></li>
-          </ul>
         </div>
 
       </div>

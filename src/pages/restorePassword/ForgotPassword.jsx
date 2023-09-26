@@ -17,7 +17,7 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message.message)
+      toast.error(message.message || message)
     }
     if (isSuccess) {
       toast.success('Contraseña Actualizada', { autoClose: 1000, hideProgressBar: false })
@@ -61,7 +61,7 @@ const ForgotPassword = () => {
             {errors.password && <span className='errores'>{errors.password}</span>}
           </div>
           <button className='w-75 btn btn-lg btn-primary'>Cambiar Contraseña</button>
-          <Link to='/'>Volver</Link>
+          <Link to='/login'>Volver</Link>
         </form>
       </article>
     </main>

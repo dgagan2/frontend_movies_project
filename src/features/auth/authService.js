@@ -25,10 +25,15 @@ const forgotPassword = async (input) => {
   return response.data
 }
 
+const logout = () => {
+  sessionStorage.removeItem('user')
+}
+
 const authService = {
   register,
   login,
-  forgotPassword
+  forgotPassword,
+  logout
 }
 
 export default authService

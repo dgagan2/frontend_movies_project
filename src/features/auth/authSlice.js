@@ -34,6 +34,9 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   }
 })
 
+export const logout = createAsyncThunk('auth/logout', async () => {
+  await authService.logout()
+})
 export const changePassword = createAsyncThunk('auth/changePassword', async (user, thunkAPI) => {
   try {
     const response = await authService.forgotPassword(user)
@@ -67,7 +70,7 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
-        state.message = action.payload
+        state.message = action.payload || 'Servicio no disponible, intente más tarde'
         state.user = null
       })
       .addCase(login.pending, (state) => {
@@ -81,7 +84,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
-        state.message = action.payload
+        state.message = action.payload || 'Servicio no disponible, intente más tarde'
         state.user = null
       })
       .addCase(changePassword.pending, (state) => {
@@ -94,7 +97,10 @@ export const authSlice = createSlice({
       .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
-        state.message = action.payload
+        state.message = action.payload || 'Servicio no disponible, intente más tarde'
+        state.user = null
+      })
+      .addCase(logout.fulfilled, (state) => {
         state.user = null
       })
   }

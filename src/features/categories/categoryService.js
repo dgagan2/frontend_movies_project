@@ -5,11 +5,16 @@ const token = user ? user.token : ''
 const config = {
   headers: {
     api: VITE_API_KEY,
-    Authorization: `Bearer ${token || null}`
+    Authorization: `Bearer ${token}`
   }
 }
 
-export const getAllCategories = async () => {
+const getAllCategories = async () => {
   const response = await axios.get(`${VITE_API_URL}/movies/genre`, config)
   return response.data
 }
+const categoryService = {
+  getAllCategories
+}
+
+export default categoryService

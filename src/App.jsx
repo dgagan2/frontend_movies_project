@@ -7,17 +7,27 @@ import NotFound from './pages/notFound/NotFound'
 import SignUp from './pages/signUp/SignUp'
 import ForgotPassword from './pages/restorePassword/ForgotPassword'
 import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 
 function App () {
-  const { user } = useSelector((state) => state.auth)
+  const { user, isSuccess } = useSelector((state) => state.auth)
+  const [isLoggin, setIsLoggin] = useState(false)
+  useEffect(() => {
+    if (user != null) {
+      setIsLoggin(true)
+    } else {
+      setIsLoggin(false)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, isSuccess])
   return (
     <>
       <BrowserRouter>
-        {user
+        {isLoggin
           ? <RoutesIndex />
           : (
             <Routes>
-              <Route path='/' element={<Login />} />
+              <Route path='/login' element={<Login />} />
               <Route path='/account/registration' element={<SignUp />} />
               <Route path='/account/forgotpassword' element={<ForgotPassword />} />
               <Route path='/*' element={<NotFound />} />

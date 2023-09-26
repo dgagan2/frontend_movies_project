@@ -5,31 +5,82 @@
 .logo-navbar{
     width: 50px;
 }
-#dropdownMenuUser {
-    background-color: transparent;
-}
-
 .navbar .button-search{
     background-color: transparent;
     border-style: none;
 }
-.button-search img{
-    width: 30px;
-}
+
 .navbar #navbarTogglerDemo02{
     margin: 0px 20px;
 }
-
 .navbar .container-fluid{
     background-color: #10104e;
 }
-.navbar .dropdown{
-    margin: 10px 20px;
+.navbar #input-movie-search{
+    margin-right:30px;
+}
+/* Estilos menu  dropdown usuario */
+#dropdownMenuUser {
+    background-color: transparent;
+}
+/* Estilos menu  dropdown peliulas favorias */
+#dropdownMenuFavorites {
+    background-color: transparent;
+    border-color: transparent;
+    color: transparent;
+    padding: 0px;
 }
 
+.button-search img, #dropdownMenuFavorites img{
+    width: 30px;
+}
+
+#dropdownMenuFavorites img{
+    padding-top: 4px;
+}
+
+#Container-dropdown-menu-favorites ul{
+    width: max-content;
+    padding: 0px;
+    background-color: transparent;
+    border-style: none;
+}
+
+#Container-dropdown-menu-favorites li{
+    padding: 0px 10px;
+    border-style: groove;
+    border-radius: 15px;
+    border-color: #ffffff1c;
+    font-size: 15px;    
+    background-color:  #f5f7f7ed;
+}
+
+.navbar .Container-dropdown-menu-user{
+    margin: 10px 20px;
+}
+.container-favorite-movie{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    max-height: 105px;
+    margin: 5px 2px;
+}
+.container-favorite-movie .image-favorite-movie{
+    width: 65px !important;
+    border-radius: 10px;
+}
+
+.container-favorite-movie-data h4, .container-favorite-movie-data p, #Container-dropdown-menu-favorites a{
+    text-decoration: none;
+    color: black;
+    padding: 0px;
+    margin: 0px;
+}
 @media (min-width: 992px){
     .navbar{
         padding: 0px 150px 0px 150px;
     }
+    
     
 }

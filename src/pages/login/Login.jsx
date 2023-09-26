@@ -13,20 +13,19 @@ const Login = () => {
   const [errorsLogin, setErrorsLogin] = useState({})
 
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
-  const homeNavigate = useNavigate()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (isError) {
-      toast.error(message.message)
+      toast.error(message.message || message)
     }
     if (isSuccess || user) {
-      homeNavigate('/home')
-      setTimeout(() => { alert('Su sesión va a expirar') }, 550000)
+      navigate('/home')
     }
 
     dispatch(reset())
-  }, [isError, message, homeNavigate, dispatch, user, isSuccess])
+  }, [isError, message, dispatch, user, isSuccess, navigate])
 
   const sendData = () => {
     const newErros = validateFormLogin(input)
@@ -60,7 +59,7 @@ const Login = () => {
               {errorsLogin.password && <span className='errores'>{errorsLogin.password}</span>}
             </div>
             <div className='container-button-login'>
-              <button className='w-100 btn btn-lg btn-primary'>Iniciar sesión</button>
+              <button className='w-100 btn btn-lg btn-primary' type='submit' onSubmit={handleSubmit}>Iniciar sesión</button>
             </div>
 
           </form>
