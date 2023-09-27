@@ -18,3 +18,18 @@ body{
     display: flex;
     align-items: center;
 }
+
+@media (max-width: 992px){
+  #container-menu-dashboard{
+      width: auto;
+      height: auto;
+  }
+  .accordion{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  .container-dashboard{
+    flex-direction: column;
+  }
+}

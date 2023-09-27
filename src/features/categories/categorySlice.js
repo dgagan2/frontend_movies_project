@@ -44,7 +44,7 @@ export const categorySlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload || 'Servicio no disponible, intente más tarde'
-        state.user = null
+        state.categories = null
       })
   }
 })
