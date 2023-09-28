@@ -1,12 +1,13 @@
 import React from 'react'
-import Header from '../../components/header/Header'
+
 import './home.css'
 import PremiereMovies from '../../components/premiere/PremiereMovies'
 import BillboardMovies from '../../components/billboard/BillboardMovies'
+import NavHeader from '../../components/header/Header'
 const Home = () => {
   return (
     <>
-      <Header />
+      <NavHeader />
       <main className='container-home-movies'>
         <PremiereMovies />
         <article>

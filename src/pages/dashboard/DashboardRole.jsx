@@ -1,12 +1,13 @@
 import React from 'react'
-import Header from '../../components/header/Header'
+
 import MenuDashboard from '../../components/menuDashboard/MenuDashboard'
 import SearchRole from '../../components/users/SearchRole'
+import NavHeader from '../../components/header/Header'
 
 const DashboardRole = () => {
   return (
     <>
-      <Header />
+      <NavHeader />
       <main className='container-dashboard bg-light d-flex'>
 
         <MenuDashboard />

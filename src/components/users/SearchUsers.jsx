@@ -1,12 +1,38 @@
 /* eslint-disable react/jsx-indent */
 /* eslint-disable react/jsx-curly-brace-presence */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './user.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { reset, userList, searchUserEmail, searchUserRole, searchUserState } from '../../features/user/userSlice'
+import Spinner from '../Spinner'
+import iconDeleteUser from '../../assets/iconDelete.png'
+import iconEditUser from '../../assets/iconEdit.png'
+
 const SearchUsers = () => {
   const [optionSearch, setOptionSearch] = useState('email')
   const [roleSelected, setRoleSelected] = useState('customer')
   const [stateSelected, setStateSelected] = useState('active')
-  const [dateEmail, setDataEmail] = useState('')
+  const [dataEmail, setDataEmail] = useState('')
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const limit = 10
+  const skip = 0
+
+  const { users, isLoading, isError, isSuccess, message } = useSelector((state) => state.users)
+
+  useEffect(() => {
+    dispatch(userList({ limit, skip }))
+  }, [])
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message.message || message)
+    }
+    dispatch(reset())
+  }, [isError, message, dispatch, isSuccess, navigate])
 
   const optioneToRender = () => {
     if (optionSearch === 'email') {
@@ -15,8 +41,8 @@ const SearchUsers = () => {
     if (optionSearch === 'role') {
       return (
               <select id='role' className='form-select' name='role' onChange={(e) => { setRoleSelected(e.target.value) }}>
-                      <option value='customer'>Usuario</option>
-                      <option value='admin'>Administrador</option>
+                      <option value='customer'>Customer</option>
+                      <option value='admin'>Admin</option>
 
               </select>
       )
@@ -33,10 +59,45 @@ const SearchUsers = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    switch (optionSearch) {
+      case 'email':
+        if (!dataEmail) {
+          toast.error('Debe ingresar el correo a buscar')
+        } else {
+          dispatch(searchUserEmail(dataEmail))
+        }
+        break
+      case 'role':
+        dispatch(searchUserRole(roleSelected))
+        break
+      case 'state':
+        dispatch(searchUserState(stateSelected))
+        break
+    }
   }
 
+  const deleteUserById = (id) => {
+    if (!id) {
+      toast.error('Id vacio')
+    } else {
+      console.log('paso')
+      dispatch(deleteUserById(id))
+      dispatch(userList({ limit, skip }))
+    }
+  }
+  const resetFields = () => {
+    setOptionSearch('email')
+    setRoleSelected('customer')
+    setStateSelected('active')
+    dispatch(userList({ limit, skip }))
+  }
+
+  if (isLoading) {
+    return <Spinner />
+  }
   return (
-    <article>
+    <>
+     <article>
         <div className='container-form-search-user'>
             <form onSubmit={handleSubmit}>
                 <div className='form-login d-flex flex-column gap-2'>
@@ -47,16 +108,46 @@ const SearchUsers = () => {
                 <option value='state'>Estado</option>
                 </select>
                 {optioneToRender()}
-                <button className='w-100 btn btn-lg' type='submit' style={{ backgroundColor: '#10104e', color: 'white' }}>Buscar</button>
+                <div className='d-flex gap-3'>
+                <button className='w-50 btn btn-lg' type='submit' style={{ backgroundColor: '#10104e', color: 'white' }}>Buscar</button>
+                <button className='w-50 btn btn-lg' type='submit' style={{ backgroundColor: '#10104e', color: 'white' }} onClick={() => { resetFields() }}>Borrar</button>
+                </div>
 
                 </div>
 
             </form>
         </div>
-        <div className='container-users'>
-            <h1>Data user</h1>
+        <div className='container-list-users'>
+          <div className='table-responsive'>
+            <table className='table align-middle'>
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th>Roles</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users?.map((data) => (
+                  <tr key={data?.id}>
+                      <td>{data?.email}</td>
+                      <td>{data?.fullName?.firstname}</td>
+                      <td>{data?.fullName?.lastName}</td>
+                      <td>{data?.role}</td>
+                      <td>{data?.state}</td>
+                      <td><button><img src={iconEditUser} alt='Editar Usuario' onClick={() => { deleteUserById(data.id) }} /></button></td>
+                      <td><button><img src={iconDeleteUser} alt='Eliminar usuario' /></button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-    </article>
+     </article>
+
+    </>
 
   )
 }

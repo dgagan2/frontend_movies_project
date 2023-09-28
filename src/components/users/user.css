@@ -1,7 +1,16 @@
-.container-form-search-user{
+.container-form-search-user, .container-list-users{
     margin: 30px 130px;
 }
 
 .container-users{
     width: -webkit-fill-available;
+}
+
+.table img{
+    width: 22px;
+}
+
+.table button{
+    background-color: transparent;
+    border-style: none;
 }

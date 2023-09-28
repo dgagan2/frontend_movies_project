@@ -1,11 +1,12 @@
 import React from 'react'
-import Header from '../../components/header/Header'
+
 import MenuDashboard from '../../components/menuDashboard/MenuDashboard'
+import NavHeader from '../../components/header/Header'
 
 const DashboardState = () => {
   return (
     <>
-      <Header />
+      <NavHeader />
       <main className='container-dashboard bg-light d-flex'>
 
         <MenuDashboard />
