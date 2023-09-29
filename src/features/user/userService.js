@@ -36,7 +36,7 @@ const searchUserByState = async (state) => {
 }
 
 const deleteUser = async (id) => {
-  const response = await axios.delete(`${VITE_API_URL}/user/search/${id}`, getToken())
+  const response = await axios.delete(`${VITE_API_URL}/user/${id}`, getToken())
   return response.data
 }
 const userService = {

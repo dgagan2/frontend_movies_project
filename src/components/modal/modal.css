@@ -1,0 +1,40 @@
+.modal{
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    width: 100%;
+    top:auto;
+    min-height: 80vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    height: -webkit-fill-available;
+    color: white;
+}
+.modal form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.modal-dialog{
+    width: 100%;
+}
+.modal.is-open{
+    display: flex;
+}
+body.modal-active{
+    overflow: hidden;
+}
+.modal h3{
+    text-align: center;
+}
+#container-buttons-modal-user{
+    margin: 12px 0px 30px 0px;
+}
+
+#container-buttons-modal-user button{
+    background-color: #10104e;
+    color: white;
+}

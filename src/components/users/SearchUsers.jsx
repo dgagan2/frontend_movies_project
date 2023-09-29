@@ -5,10 +5,11 @@ import './user.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { reset, userList, searchUserEmail, searchUserRole, searchUserState } from '../../features/user/userSlice'
+import { reset, userList, searchUserEmail, searchUserRole, searchUserState, deleteUser } from '../../features/user/userSlice'
 import Spinner from '../Spinner'
 import iconDeleteUser from '../../assets/iconDelete.png'
 import iconEditUser from '../../assets/iconEdit.png'
+import ModalUser from '../modal/ModalUser'
 
 const SearchUsers = () => {
   const [optionSearch, setOptionSearch] = useState('email')
@@ -25,14 +26,14 @@ const SearchUsers = () => {
 
   useEffect(() => {
     dispatch(userList({ limit, skip }))
-  }, [])
+  }, [isSuccess])
 
   useEffect(() => {
     if (isError) {
       toast.error(message.message || message)
     }
     dispatch(reset())
-  }, [isError, message, dispatch, isSuccess, navigate])
+  }, [isError, message, dispatch, navigate])
 
   const optioneToRender = () => {
     if (optionSearch === 'email') {
@@ -80,9 +81,9 @@ const SearchUsers = () => {
     if (!id) {
       toast.error('Id vacio')
     } else {
-      console.log('paso')
-      dispatch(deleteUserById(id))
+      dispatch(deleteUser(id))
       dispatch(userList({ limit, skip }))
+      toast.done('Usuario eliminado')
     }
   }
   const resetFields = () => {
@@ -92,6 +93,9 @@ const SearchUsers = () => {
     dispatch(userList({ limit, skip }))
   }
 
+  const modalEditUser = (data) => {
+
+  }
   if (isLoading) {
     return <Spinner />
   }
@@ -137,8 +141,8 @@ const SearchUsers = () => {
                       <td>{data?.fullName?.lastName}</td>
                       <td>{data?.role}</td>
                       <td>{data?.state}</td>
-                      <td><button><img src={iconEditUser} alt='Editar Usuario' onClick={() => { deleteUserById(data.id) }} /></button></td>
-                      <td><button><img src={iconDeleteUser} alt='Eliminar usuario' /></button></td>
+                      <td><button onClick={() => { modalEditUser(data) }}><img src={iconEditUser} alt='Editar Usuario' /></button></td>
+                      <td><button onClick={() => { deleteUserById(data.id) }}><img src={iconDeleteUser} alt='Eliminar usuario' /></button></td>
                   </tr>
                 ))}
               </tbody>

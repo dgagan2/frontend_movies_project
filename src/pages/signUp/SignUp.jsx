@@ -24,7 +24,7 @@ const SignUp = () => {
     if (isSuccess || user) {
       toast.success('Usuario creado', { autoClose: 1000, hideProgressBar: false })
       setTimeout(() => {
-        navigate('/')
+        navigate('/login')
       }, 100)
     }
 
@@ -45,7 +45,7 @@ const SignUp = () => {
     firstname: '',
     lastName: '',
     age: '',
-    phone_number: '',
+    phoneNumber: '',
     street: '',
     city: ''
   })
@@ -111,8 +111,8 @@ const SignUp = () => {
                 </div>
 
                 <div className='col-sm-6'>
-                  <label htmlFor='phone_number' className='form-label'>Numero Celular<span className='text-muted'>(Optional)</span></label>
-                  <input type='number' className='form-control' id='phone_number' value={input.phone_number} onChange={handleInputChange} name='phone_number' />
+                  <label htmlFor='phoneNumber' className='form-label'>Numero Celular<span className='text-muted'>(Optional)</span></label>
+                  <input type='number' className='form-control' id='phoneNumber' value={input.phoneNumber} onChange={handleInputChange} name='phoneNumber' />
                 </div>
 
                 <div className='col-sm-6'>
