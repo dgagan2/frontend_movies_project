@@ -7,21 +7,21 @@ const MenuDashboard = () => {
         <div className='accordion' id='accordionExample'>
           <div className='accordion-item'>
             <h2 className='accordion-header' id='headingOne'>
-              <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+              <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='false' aria-controls='collapseOne'>
                 Usuarios
               </button>
             </h2>
-            <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+            <div id='collapseOne' className='accordion-collapse collapse' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
               <div className='accordion-body'>
                 <Link className='w-100' id='accordion-button-item' to='/dashboard'>Consultar Usuario</Link>
               </div>
             </div>
-            <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+            <div id='collapseOne' className='accordion-collapse collapse' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
               <div className='accordion-body'>
                 <Link className='w-100' id='accordion-button-item' to='/dashboard/role'>Roles</Link>
               </div>
             </div>
-            <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+            <div id='collapseOne' className='accordion-collapse collapse' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
               <div className='accordion-body'>
                 <Link className='w-100' id='accordion-button-item'>Estados</Link>
               </div>

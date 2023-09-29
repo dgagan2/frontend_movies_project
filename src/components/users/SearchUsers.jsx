@@ -5,18 +5,17 @@ import './user.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { reset, userList, searchUserEmail, searchUserRole, searchUserState, deleteUser } from '../../features/user/userSlice'
+import { reset, userList, searchUserEmail, searchUserRole, searchUserState, deleteUser, searchUserID } from '../../features/user/userSlice'
 import Spinner from '../Spinner'
 import iconDeleteUser from '../../assets/iconDelete.png'
 import iconEditUser from '../../assets/iconEdit.png'
-import ModalUser from '../modal/ModalUser'
+import { modalOpen } from '../../features/modals/modalSlice'
 
 const SearchUsers = () => {
   const [optionSearch, setOptionSearch] = useState('email')
   const [roleSelected, setRoleSelected] = useState('customer')
   const [stateSelected, setStateSelected] = useState('active')
   const [dataEmail, setDataEmail] = useState('')
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const limit = 10
@@ -94,7 +93,12 @@ const SearchUsers = () => {
   }
 
   const modalEditUser = (data) => {
-
+    if (data.id) {
+      dispatch(searchUserID(data.id))
+      dispatch(modalOpen(data.id))
+    } else {
+      toast.error('Id vacio')
+    }
   }
   if (isLoading) {
     return <Spinner />

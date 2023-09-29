@@ -20,13 +20,12 @@
 }
 .modal-dialog{
     width: 100%;
+    pointer-events: all;
 }
 .modal.is-open{
     display: flex;
 }
-body.modal-active{
-    overflow: hidden;
-}
+
 .modal h3{
     text-align: center;
 }

@@ -3,8 +3,10 @@ import userService from './userService'
 
 const initialState = {
   users: null,
+  searchedUser: null,
   isError: false,
   isSuccess: false,
+  isSuccessUpdate: false,
   isLoading: false,
   message: ''
 }
@@ -50,15 +52,37 @@ export const searchUserState = createAsyncThunk('users/search/state', async (sta
   }
 })
 
-export const deleteUser = createAsyncThunk('users/delete', async (id, thunkAPI) => {
+export const searchUserID = createAsyncThunk('users/search/userId', async (id, thunkAPI) => {
   try {
-    const response = await userService.deleteUser(id)
+    const response = await userService.searchUserByID(id)
     return response
   } catch (error) {
     const message = error.response.data
     return thunkAPI.rejectWithValue(message)
   }
 })
+
+export const deleteUser = createAsyncThunk('users/delete', async (id, thunkAPI) => {
+  try {
+    const response = await userService.deleteUser(id)
+    console.log(response)
+    return response
+  } catch (error) {
+    const message = error.response.data
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const updateUser = createAsyncThunk('users/update', async (data, thunkAPI) => {
+  try {
+    const response = await userService.updateUser(data)
+    return response
+  } catch (error) {
+    const message = error.response.data
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 export const userSlice = createSlice({
   name: 'users',
   initialState,
@@ -68,6 +92,8 @@ export const userSlice = createSlice({
       state.isError = false
       state.isSuccess = false
       state.message = ''
+      state.searchedUser = null
+      state.isSuccessUpdate = false
     }
   },
   extraReducers: (builder) => {
@@ -141,6 +167,36 @@ export const userSlice = createSlice({
         state.isError = true
         state.message = action.payload || 'Servicio no disponible, intente más tarde'
         state.categories = null
+      })
+      .addCase(searchUserID.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(searchUserID.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.searchedUser = action.payload
+      })
+      .addCase(searchUserID.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.searchedUser = null
+        state.message = action.payload || 'Servicio no disponible, intente más tarde'
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccessUpdate = true
+        state.searchedUser = null
+        state.message = action.payload || 'Usuario actualizado'
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.searchedUser = null
+        state.isSuccessUpdate = false
+        state.message = action.payload || 'Servicio no disponible, intente más tarde'
       })
   }
 })

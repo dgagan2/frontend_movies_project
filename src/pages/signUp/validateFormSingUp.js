@@ -48,4 +48,38 @@ const validateForm = (input) => {
   return errors
 }
 
-export default validateForm
+const validateFormUpdateUSer = (input) => {
+  const errors = {}
+  if (!input.email.trim()) {
+    errors.email = 'El campo email es requerido'
+  } else {
+    if (!expresiones.txtEmail.test(input.email)) {
+      errors.email = 'La información ingresada no es un correo'
+    }
+  }
+  if (!input.firstname.trim()) {
+    errors.firstname = 'El campo Nombres es requerido'
+  } else {
+    if (!expresiones.txtName.test(input.firstname)) {
+      errors.firstname = 'Nombre no valido'
+    }
+  }
+  if (!input.lastName.trim()) {
+    errors.lastName = 'El campo Apellidos es requerido'
+  } else {
+    if (!expresiones.txtName.test(input.lastName)) {
+      errors.lastName = 'Apellido no valido'
+    }
+  }
+  if (!input.age) {
+    errors.age = 'El campo Edad es requerido'
+  } else {
+    if (!expresiones.txtAge.test(input.age)) {
+      errors.age = 'Edad no valida'
+    }
+  }
+
+  return errors
+}
+
+export { validateForm, validateFormUpdateUSer }

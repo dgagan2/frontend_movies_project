@@ -39,12 +39,25 @@ const deleteUser = async (id) => {
   const response = await axios.delete(`${VITE_API_URL}/user/${id}`, getToken())
   return response.data
 }
+
+const searchUserByID = async (id) => {
+  const response = await axios.get(`${VITE_API_URL}/user/${id}`, getToken())
+  return response.data
+}
+
+const updateUser = async (data) => {
+  const response = await axios.patch(`${VITE_API_URL}/user/`, data, getToken())
+  return response.data
+}
+
 const userService = {
   getAllUsers,
   searchUserByEmail,
   searchUserByRole,
   searchUserByState,
-  deleteUser
+  searchUserByID,
+  deleteUser,
+  updateUser
 }
 
 export default userService

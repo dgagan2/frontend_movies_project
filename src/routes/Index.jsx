@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import NotFound from '../pages/notFound/NotFound'
 import Home from '../pages/home/Home'
 import Dashboard from '../pages/dashboard/Dashboard'
-import DashboardRole from '../pages/dashboard/DashboardRole'
+import DashboardRole from '../pages/dashboard/role/DashboardRole'
 
 const RoutesIndex = () => {
   return (
