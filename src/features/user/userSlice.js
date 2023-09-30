@@ -65,7 +65,6 @@ export const searchUserID = createAsyncThunk('users/search/userId', async (id, t
 export const deleteUser = createAsyncThunk('users/delete', async (id, thunkAPI) => {
   try {
     const response = await userService.deleteUser(id)
-    console.log(response)
     return response
   } catch (error) {
     const message = error.response.data

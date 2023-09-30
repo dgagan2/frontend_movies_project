@@ -6,7 +6,9 @@ const initialState = {
   roleId: null,
   isError: false,
   isSuccess: false,
+  isSuccessUpdateRole: false,
   isLoading: false,
+  isOpen: false,
   message: ''
 }
 
@@ -53,7 +55,6 @@ export const searchRoleById = createAsyncThunk('roles/search/id', async (id, thu
 export const deleteRole = createAsyncThunk('roles/delete', async (id, thunkAPI) => {
   try {
     const response = await roleService.deleteRole(id)
-    console.log(response)
     return response
   } catch (error) {
     const message = error.response.data
@@ -90,6 +91,7 @@ export const roleSlice = createSlice({
       .addCase(newRole.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
+        state.message = 'Role creado'
       })
       .addCase(newRole.rejected, (state, action) => {
         state.isLoading = false
@@ -118,7 +120,6 @@ export const roleSlice = createSlice({
       .addCase(searchRoleById.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.message = 'Rol creado'
         state.roleId = action.payload
       })
       .addCase(searchRoleById.rejected, (state, action) => {
@@ -160,7 +161,7 @@ export const roleSlice = createSlice({
       })
       .addCase(updateRole.fulfilled, (state, action) => {
         state.isLoading = false
-        state.isSuccess = true
+        state.isSuccessUpdateRole = true
         state.message = 'Usuario Actualizado'
       })
       .addCase(updateRole.rejected, (state, action) => {
