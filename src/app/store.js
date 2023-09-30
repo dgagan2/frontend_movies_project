@@ -4,12 +4,14 @@ import categoryReducer from '../features/categories/categorySlice'
 import userReducer from '../features/user/userSlice'
 import modalReduce from '../features/modals/modalSlice'
 import rolesReducer from '../features/roles/roleSlice'
+import movieReducer from '../features/movie/movieSlice'
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     category: categoryReducer,
     users: userReducer,
     modalReduce,
-    rol: rolesReducer
+    rol: rolesReducer,
+    movie: movieReducer
   }
 })

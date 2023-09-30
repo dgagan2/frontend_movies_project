@@ -7,7 +7,7 @@ const MenuDashboard = () => {
         <div className='accordion' id='accordionExample'>
           <div className='accordion-item'>
             <h2 className='accordion-header' id='headingOne'>
-              <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='false' aria-controls='collapseOne'>
+              <button className='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='false' aria-controls='collapseOne'>
                 Usuarios
               </button>
             </h2>
@@ -35,12 +35,12 @@ const MenuDashboard = () => {
             </h2>
             <div id='collapseTwo' className='accordion-collapse collapse' aria-labelledby='headingTwo' data-bs-parent='#accordionExample'>
               <div className='accordion-body'>
-                <Link className='w-100' id='accordion-button-item'>Agregar Pelicula</Link>
+                <Link className='w-100' id='accordion-button-item' to='/dashboard/movie/add'>Agregar Pelicula</Link>
               </div>
             </div>
             <div id='collapseTwo' className='accordion-collapse collapse' aria-labelledby='headingTwo' data-bs-parent='#accordionExample'>
               <div className='accordion-body'>
-                <Link className='w-100' id='accordion-button-item'>Editar Pelicula</Link>
+                <Link className='w-100' id='accordion-button-item' to='/dashboard/movie/update'>Editar Pelicula</Link>
               </div>
             </div>
 

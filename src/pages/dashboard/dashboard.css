@@ -1,7 +1,9 @@
 .container-dashboard.modal-active{
     overflow: hidden;
 }
-
+.container-dashboard{
+    height: fit-content;
+}
 .button-form-search-role img{
     width: 30px;
 }
@@ -9,4 +11,7 @@
 .button-form-search-role{
     background-color: transparent;
     border-style: none;
+}
+.errores{
+    color: red;
 }

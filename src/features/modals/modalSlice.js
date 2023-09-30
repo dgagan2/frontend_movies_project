@@ -7,7 +7,6 @@ const initialState = {
 }
 
 export const modalOpen = createAsyncThunk('modal/update', (data) => {
-  console.log('paso')
   return data
 })
 

@@ -49,7 +49,6 @@ const ModalRole = () => {
     dispatch(reset())
   }
 
-  console.log('first', isOpen)
   return (
     <article className={`modal ${isOpen ? 'is-open' : ''}`}>
       <div className='modal-dialog modal-dialog-scrollable'>
