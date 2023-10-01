@@ -8,28 +8,21 @@ import DropdownMenuUser from './DropdownMenuUser'
 import DropdownFavorites from './DropdownFavorites'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { categoriesNavbar, reset } from '../../features/categories/categorySlice'
 
-import Spinner from '../Spinner'
+import { getGenreHeader } from '../../features/genres/genreSlice'
 
 const NavHeader = () => {
-  const { categories, isLoading, isError, isSuccess, message } = useSelector((state) => state.category)
+  const { isSuccess, isSuccessUpdateGenre, genreHeader, message } = useSelector((state) => state.genre)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(categoriesNavbar())
-  }, [])
+  const limit = 6
+  const skip = 0
 
   useEffect(() => {
-    if (isError) {
-      toast.error(message.message || message)
-    }
-    dispatch(reset())
-  }, [isError, message, dispatch, isSuccess, categories])
-
-  if (isLoading) {
-    return <Spinner />
-  }
+    setTimeout(() => {
+      dispatch(getGenreHeader({ skip, limit }))
+    }, 100)
+  }, [dispatch, isSuccessUpdateGenre, isSuccess, message])
 
   return (
     <header>
@@ -44,13 +37,13 @@ const NavHeader = () => {
 
           <div className='collapse navbar-collapse' id='navbarTogglerDemo02'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-              {categories
-                ? categories.map((item, index) => (
-                  <li className='nav-item' key={categories[index]._id}>
-                    <Link className='nav-link active' aria-current='page' to=''>{categories[index].name}</Link>
-                  </li>
-                ))
-                : null}
+              {genreHeader && genreHeader.map((item) => (
+
+                <li className='nav-item' key={item._id}>
+                  <Link className='nav-link active' aria-current='page' to=''>{item.name}</Link>
+                </li>
+
+              ))}
             </ul>
             <form className='d-flex' role='search' id='input-movie-search'>
               <input className='form-control me-2' type='search' placeholder='Search' aria-label='Search' />

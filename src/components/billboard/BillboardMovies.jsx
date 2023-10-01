@@ -1,52 +1,41 @@
-import { Link } from 'react-router-dom'
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import React, { useEffect } from 'react'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { Carousel } from 'react-responsive-carousel'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMoviesBillboard } from '../../features/movie/movieSlice'
 import './billboard.css'
 
 const BillboardMovies = () => {
+  const { moviesBillboard } = useSelector((state) => state.movie)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getMoviesBillboard())
+  }, [])
+
   return (
-    <div id='carouselExampleControls' className='carousel slide' data-bs-ride='carousel'>
-      <div className='carousel-inner'>
-        <div className='carousel-item active'>
-          <div className='carousel-data-movies'>
-            <h2>Titulo</h2>
-            <p>Descripcion</p>
-            <b>Duracion</b>
-            <Link className='w-50 btn btn-primary btn-sm mt-3'>Ver Pelicula</Link>
+
+    <Carousel>
+      {moviesBillboard && moviesBillboard.map((data) => (
+        <div key={data._id}>
+          <img src={data.postBackground} />
+          <div className='legend p-5'>
+            <h5>{data?.title}</h5>
+            <p>{data?.overview}</p>
+            <p>Genero: {data?.genre?.map((genre, index) => (
+              <span key={index}>{genre}</span>
+            ))}
+            </p>
+            <button className='w-150 btn btn-primary btn-lg'>Ver Pelicula</button>
           </div>
-          <img src='https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2022/08/star-wars-2791631.jpg?tf=3840x' className='d-block w-100' alt='...' />
         </div>
-        {/* <div className='carousel-item'>
-          <img src='https://i.blogs.es/5b71be/calendario-peliculas-marvel/1366_2000.jpeg' className='d-block w-100' alt='...' />
-        </div>
-        <div className='carousel-item'>
-          <img src='https://www.lavanguardia.com/andro4all/hero/2023/04/terror-netflix.png?width=768&aspect_ratio=16:9&format=nowebp' className='d-block w-100' alt='...' />
-        </div> */}
-      </div>
-      <button className='carousel-control-prev' type='button' data-bs-target='#carouselExampleControls' data-bs-slide='prev'>
-        <span className='carousel-control-prev-icon' aria-hidden='true' />
-        <span className='visually-hidden'>Previous</span>
-      </button>
-      <button className='carousel-control-next' type='button' data-bs-target='#carouselExampleControls' data-bs-slide='next'>
-        <span className='carousel-control-next-icon' aria-hidden='true' />
-        <span className='visually-hidden'>Next</span>
-      </button>
-    </div>
+      ))}
+
+    </Carousel>
+
   )
 }
 
 export default BillboardMovies
-
-// const BillboardMovies = () => {
-//   return (
-//     <>
-//       <div className='billboard-movies-list'>
-//         <img src='https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2022/08/star-wars-2791631.jpg?tf=3840x' alt='' />
-//         <h2>Titulo</h2>
-//         <p>Descripcion</p>
-//         <b>Duracion</b>
-//         <Link>Ver Pelicula</Link>
-//       </div>
-//     </>
-//   )
-// }
-
-// export default BillboardMovies

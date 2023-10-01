@@ -9,3 +9,27 @@
     flex-direction: column;
 
 }
+.carousel p{
+    font-size: 15px;
+}
+.carousel .slide .legend {
+    top: 0px !important;
+    background: #000000a6;
+    left: 45% !important;
+    bottom: -16px !important;
+    border-radius: 0px !important;
+    width: 40% !important;
+    text-align: initial;
+    padding-left: 20px !important;
+    font-family: 'Montserrat',sans-serif;
+    opacity: 100%;
+
+}
+.carousel .carousel-status{
+    color: transparent;
+    text-shadow: none !important;
+}
+
+.thumbs-wrapper{
+    display: none;
+}
