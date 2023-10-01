@@ -6,12 +6,14 @@ body{
 .container-home-movies{
     display: flex;
     flex-direction: column;
-    margin: 30px 200px;
+    margin: 30px 330px;
 }
 .container-home-movies ul{
     list-style: none;
 }
-
+.carousel-root{
+    width: 90%;
+}
 @media (max-width: 992px){
     .container-home-movies{
         display: flex;
