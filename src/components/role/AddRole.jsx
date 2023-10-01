@@ -44,7 +44,10 @@ const AddRole = () => {
   }
 
   const Delete = (id) => {
-    updateList()
+    dispatch(deleteRole(id))
+    setTimeout(() => {
+      updateList()
+    }, 600)
   }
   const editRole = (data) => {
     dispatch(modalOpen({ id: data._id, name: data.name }))
@@ -88,10 +91,10 @@ const AddRole = () => {
               </thead>
               <tbody>
                 {roles?.map((data) => (
-                  <tr key={data?.id}>
+                  <tr key={data?._id}>
                     <td>{data?.name}</td>
                     <td><button onClick={() => { editRole(data) }}><img src={iconEditUser} alt='Editar Usuario' /></button></td>
-                    <td><button onClick={() => { Delete(data) }}><img src={iconDeleteUser} alt='Eliminar usuario' /></button></td>
+                    <td><button onClick={() => { Delete(data._id) }}><img src={iconDeleteUser} alt='Eliminar usuario' /></button></td>
                   </tr>
                 ))}
               </tbody>
