@@ -24,7 +24,7 @@ body{
       width: auto;
       height: auto;
   }
-  header{
+  .header-navbar{
     position: absolute;
     z-index: 999;
     top: 0;
@@ -37,7 +37,7 @@ body{
     width: 100%;
   }
   .container-dashboard{
-    flex-direction: column;
+    flex-direction: column !important;
     position: absolute;
     z-index: 1;
     top: 72px;
@@ -56,4 +56,5 @@ body{
   .container-form-search-user {
     margin: 30px 50px;
 } 
+
 }

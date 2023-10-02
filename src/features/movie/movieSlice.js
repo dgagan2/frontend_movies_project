@@ -5,6 +5,9 @@ const initialState = {
   movies: null,
   moviesBillboard: null,
   moviesPremiere: null,
+  movieDetail: null,
+  movieUpdate: null,
+  movieManager: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -44,6 +47,26 @@ export const getMoviesBillboard = createAsyncThunk('movie/billboard', async (thu
 export const getMovies = createAsyncThunk('movie/home', async (thunkAPI) => {
   try {
     const response = await movieService.getAllMovies()
+    return response
+  } catch (error) {
+    const message = error.response.data
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const getMovieById = createAsyncThunk('movie/home/details', async (id, thunkAPI) => {
+  try {
+    const response = await movieService.searchMoviesById(id)
+    return response
+  } catch (error) {
+    const message = error.response.data
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const updateMovie = createAsyncThunk('movie/update', async (data, thunkAPI) => {
+  try {
+    const response = await movieService.(data)
     return response
   } catch (error) {
     const message = error.response.data
@@ -110,8 +133,22 @@ export const movieSlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         state.movies = action.payload
+        state.movieManager = action.payload
       })
       .addCase(getMovies.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload || 'Servicio no disponible, intente más tarde'
+      })
+      .addCase(getMovieById.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getMovieById.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.movieDetail = action.payload
+      })
+      .addCase(getMovieById.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload || 'Servicio no disponible, intente más tarde'

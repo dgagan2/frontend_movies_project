@@ -72,10 +72,10 @@ const searchMoviesById = async (id) => {
 //   return response.data
 // }
 
-// const updateUser = async (data) => {
-//   const response = await axios.patch(`${VITE_API_URL}/user/`, data, getToken())
-//   return response.data
-// }
+const updateMovie = async (data) => {
+  const response = await axios.patch(`${VITE_API_URL}/movies/`, data, getToken())
+  return response.data
+}
 
 const movieService = {
   addMovie,
@@ -85,7 +85,8 @@ const movieService = {
   getAllMovies,
   getLatestMovies,
   getPremiereMovies,
-  getBillboardMovies
+  getBillboardMovies,
+  updateMovie
 }
 
 export default movieService
