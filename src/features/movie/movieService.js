@@ -63,7 +63,7 @@ const getBillboardMovies = async () => {
 }
 
 const searchMoviesById = async (id) => {
-  const response = await axios.get(`${VITE_API_URL}/movies/billboard/${id}`, getToken())
+  const response = await axios.get(`${VITE_API_URL}/movies/search/${id}`, getToken())
   return response.data
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './premiere.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMoviesPremiere } from '../../features/movie/movieSlice'
+import { getMovieById, getMoviesPremiere } from '../../features/movie/movieSlice'
 
 import { useNavigate } from 'react-router-dom'
 const PremiereMovies = () => {
@@ -11,6 +11,10 @@ const PremiereMovies = () => {
   useEffect(() => {
     dispatch(getMoviesPremiere())
   }, [])
+  const Details = (movie) => {
+    dispatch(getMovieById(movie._id))
+    navigate('/prueba')
+  }
 
   return (
     <>
@@ -18,8 +22,8 @@ const PremiereMovies = () => {
         <ul className='d-flex gap-4 flex-wrap'>
           {moviesPremiere && moviesPremiere.map((data) => (
             <li key={data?._id}>
-              <div>
-                <button onClick={() => { navigate('/dashboard') }}>
+              <div className='container-premiere-images'>
+                <button onClick={() => { Details(data) }}>
                   <img src={data?.posterPath} alt={`Poster de la pelicula ${data?.title}`} />
                 </button>
               </div>

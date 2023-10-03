@@ -1,0 +1,23 @@
+.container-movie{
+    width: 60%;
+    margin: 25px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.container-movie{
+    color: white;
+}
+
+.conatiner-movie-description{
+    background-color: #00000052;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+#movie-poster-details{
+    border-radius: 15px;
+    object-fit: cover;
+    height: 265px;
+    width: 200px;
+}

@@ -4,6 +4,7 @@ import NavHeader from '../../components/header/Header'
 import Spinner from '../../components/Spinner'
 import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
+import './movieDetails.css'
 
 const Movie = () => {
   const { movieDetail, isLoading, message } = useSelector((state) => state.movie)
@@ -13,51 +14,58 @@ const Movie = () => {
   if (isLoading) {
     return <Spinner />
   }
-
+  console.log(movieDetail)
   return (
     <>
       <NavHeader />
-      <main>
-        {movieDetail.map((movie) => (
-          <section className='container-movie' key={movie?._id}>
-            <article className='container-movie-details'>
-              <img src={movie?.posterPath} alt={`Poster pelicula ${movie?.title}`} />
-              <div className='conatiner-movie-description'>
-                <div>
-                  <h3>{movie?.title}</h3>
-                  <div data-bs-spy='scroll' data-bs-target='#navbar-example3' data-bs-offset='0' tabIndex='0'>
-                    <p>{movie?.overview}</p>
-                  </div>
+      <main className='d-flex  justify-content-center'>
+        <section className='container-movie' key={movieDetail?._id}>
+          <article className='p-4'>
+            <div
+              className='container-movie-details' style={{
+                backgroundImage: `url(${movieDetail?.postBackground})`
+              }}
+            >
+              <div className='d-flex gap-4 p-3'>
+                <div className='container-movie-poster-details'>
+                  <img src={movieDetail?.posterPath} alt={`Poster pelicula ${movieDetail?.title}`} id='movie-poster-details' />
                 </div>
-                <footer>
-                  {movie?.movieDuration && <p>{movie?.movieDuration}</p>}
-                  {movie?.releaseDate && <p>{movie?.releaseDate}</p>}
 
-                  <button>Ver mas tarde</button>
-                </footer>
-              </div>
-            </article>
-            <article>
-              <div className='player-wrapper'>
-                <ReactPlayer
-                  className='react-player'
-                  url={movie?.videoLink}
-                  playing
-                  controls
-                  volume
-                  playIcon
-                />
-              </div>
-            </article>
-            <article>
-              {movie?.director && <p>Director: {movie?.director}</p>}
-              {movie?.actors && <p>Actores: {movie?.actors}</p>}
-              {movie?.genre && <p>Genero: {movie?.genre}</p>}
-              {movie?.language && <p>Lenguaje: {movie?.language}</p>}
-            </article>
-          </section>
+                <div className='conatiner-movie-description'>
+                  <div>
 
-        ))}
+                    <h3>{movieDetail?.title}</h3>
+                    <p>{movieDetail?.overview}</p>
+
+                  </div>
+                  <footer>
+                    {movieDetail?.releaseDate && <p>{movieDetail?.releaseDate}</p>}
+
+                    <button>Ver mas tarde</button>
+                  </footer>
+                </div>
+              </div>
+            </div>
+
+          </article>
+          <article>
+            <div className='player-wrapper'>
+              <ReactPlayer
+                className='react-player'
+                url={movieDetail?.videoLink}
+                controls
+                volume
+                playIcon
+              />
+            </div>
+          </article>
+          <article>
+            {movieDetail?.director && <p>Director: {movieDetail?.director}</p>}
+            {movieDetail?.actors && <p>Actores: {movieDetail?.actors}</p>}
+            {movieDetail?.genre && <p>Genero: {movieDetail?.genre}</p>}
+            {movieDetail?.language && <p>Lenguaje: {movieDetail?.language}</p>}
+          </article>
+        </section>
 
       </main>
     </>

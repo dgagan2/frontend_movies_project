@@ -1,6 +1,16 @@
 .container-premiere-movies img{
     height: 200px;
 }
+.container-premiere-images img{
+    object-fit: cover;
+    height: 220px;
+    width: 165px;
+    
+}
+.container-premiere-images button{
+    border-style: none;
+    border-radius: 10px;
+}
 
 .container-premiere-movies ul{
     padding: 0px;
