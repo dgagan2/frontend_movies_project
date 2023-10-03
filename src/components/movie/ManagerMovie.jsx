@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useForm from '../../hooks/useForms'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { reset, newMovie } from '../../features/movie/movieSlice'
+import { reset, modalOpen } from '../../features/movie/movieSlice'
 import Spinner from '../Spinner'
 import { toast } from 'react-toastify'
 import iconSearch from '../../assets/iconoBuscar.png'
@@ -25,6 +25,9 @@ const ManagerMovie = () => {
     dispatch(reset())
   }, [message, isSuccess, isError, dispatch])
 
+  const updateMovie = (data) => {
+    dispatch(modalOpen(data))
+  }
   if (isLoading) {
     return <Spinner />
   }
@@ -49,8 +52,8 @@ const ManagerMovie = () => {
           {movieManager && movieManager.map((movie) => (
             <article key={movie._id}>
               <div>
-                <button className='btn-delete-movie'><img src={iconEdit} alt='' /></button>
-                <button className='btn-edit-movie'><img src={iconDelete} alt='' /></button>
+                <button className='btn-edit-movie' onClick={() => { updateMovie(movie) }}><img src={iconEdit} alt='' /></button>
+                <button className='btn-delete-movie'><img src={iconDelete} alt='' /></button>
                 <img src={movie?.posterPath} alt='' className='image-poster' />
               </div>
               <title>{movie?.title}</title>

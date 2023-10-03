@@ -8,11 +8,20 @@ const initialState = {
   movieDetail: null,
   movieUpdate: null,
   movieManager: null,
+  isOpen: false,
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: ''
 }
+
+export const modalOpen = createAsyncThunk('movie/modal/update', (data) => {
+  return data
+})
+
+export const modalClose = createAsyncThunk('movie/modal/close', () => {
+  return true
+})
 
 export const newMovie = createAsyncThunk('movie/add', async (data, thunkAPI) => {
   try {
@@ -66,7 +75,7 @@ export const getMovieById = createAsyncThunk('movie/home/details', async (id, th
 
 export const updateMovie = createAsyncThunk('movie/update', async (data, thunkAPI) => {
   try {
-    const response = await movieService.(data)
+    const response = await movieService.updateMovie(data)
     return response
   } catch (error) {
     const message = error.response.data
@@ -75,7 +84,7 @@ export const updateMovie = createAsyncThunk('movie/update', async (data, thunkAP
 })
 
 export const movieSlice = createSlice({
-  name: 'users',
+  name: 'movie',
   initialState,
   reducers: {
     reset: (state) => {
@@ -152,6 +161,14 @@ export const movieSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload || 'Servicio no disponible, intente más tarde'
+      })
+      .addCase(modalOpen.fulfilled, (state, action) => {
+        state.isOpen = true
+        state.movieUpdate = action.payload
+      })
+      .addCase(modalClose.fulfilled, (state) => {
+        state.isOpen = false
+        state.movieUpdate = null
       })
   }
 }
