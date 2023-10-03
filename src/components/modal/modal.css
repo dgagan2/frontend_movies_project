@@ -37,3 +37,11 @@
     background-color: #10104e;
     color: white;
 }
+
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: inherit !important;
+        margin: 100px;
+    }
+}
+

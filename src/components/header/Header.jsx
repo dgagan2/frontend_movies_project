@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import './header.css'
 import logo from '../../assets/logo.png'
 import iconSearch from '../../assets/search.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import DropdownMenuUser from './DropdownMenuUser'
 import DropdownFavorites from './DropdownFavorites'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,7 +14,7 @@ import { getGenreHeader } from '../../features/genres/genreSlice'
 const NavHeader = () => {
   const { isSuccess, isSuccessUpdateGenre, genreHeader, message } = useSelector((state) => state.genre)
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const limit = 6
   const skip = 0
 
@@ -31,9 +31,9 @@ const NavHeader = () => {
           <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarTogglerDemo02' aria-controls='navbarTogglerDemo02' aria-expanded='false' aria-label='Toggle navigation'>
             <span className='navbar-toggler-icon' />
           </button>
-          <Link to='/home'>
+          <button onClick={() => { navigate('/home') }} style={{ backgroundColor: 'transparent', borderStyle: 'none' }}>
             <img className='logo-navbar' alt='Oura movies logo' src={logo} />
-          </Link>
+          </button>
 
           <div className='collapse navbar-collapse' id='navbarTogglerDemo02'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>

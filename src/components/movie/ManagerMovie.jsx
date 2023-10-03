@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useForm from '../../hooks/useForms'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { reset, modalOpen } from '../../features/movie/movieSlice'
+import { reset, modalOpen, getMovies } from '../../features/movie/movieSlice'
 import Spinner from '../Spinner'
 import { toast } from 'react-toastify'
 import iconSearch from '../../assets/iconoBuscar.png'
@@ -14,13 +14,16 @@ const ManagerMovie = () => {
   const { isError, isSuccess, isLoading, message, movieManager } = useSelector((state) => state.movie)
   const [input, setInput] = useState('')
   const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getMovies())
+  }, [])
 
   useEffect(() => {
     if (isError) {
-      toast.error(message.message || message)
+      toast.error(message.message)
     }
     if (isSuccess) {
-      toast.success(message.message || message)
+      toast.success(message.message)
     }
     dispatch(reset())
   }, [message, isSuccess, isError, dispatch])

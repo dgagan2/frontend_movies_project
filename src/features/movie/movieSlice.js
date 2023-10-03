@@ -162,6 +162,20 @@ export const movieSlice = createSlice({
         state.isError = true
         state.message = action.payload || 'Servicio no disponible, intente más tarde'
       })
+      .addCase(updateMovie.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateMovie.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.isOpen = false
+        state.movieUpdate = null
+      })
+      .addCase(updateMovie.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload || 'Servicio no disponible, intente más tarde'
+      })
       .addCase(modalOpen.fulfilled, (state, action) => {
         state.isOpen = true
         state.movieUpdate = action.payload
