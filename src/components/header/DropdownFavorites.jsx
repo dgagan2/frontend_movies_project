@@ -8,34 +8,31 @@ import movieService from '../../features/movie/movieService'
 
 const DropdownFavorites = () => {
   const [favorite, setFavorite] = useState([])
+  const [listMovies, setListMovies] = useState([])
+
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getFavoriteMovies())
-  }, [])
+
   const { listFavoriteMovies } = useSelector((state) => state.favorite)
 
   useEffect(() => {
+    dispatch(getFavoriteMovies())
     if (listFavoriteMovies) {
-      // Crear un arreglo de promesas para buscar películas por ID
-      const fetchMovies = listFavoriteMovies.movies.map(movie => movieService.searchMoviesById(movie))
+      const consultMovie = async (movieId) => {
+        // Verificar si la película ya está en el estado 'favorite' antes de consultarla
+        const response = await movieService.searchMoviesById(movieId)
+        setFavorite((prevFavorites) => [...prevFavorites, response])
+      }
 
-      // Usar Promise.all para esperar todas las promesas
-      Promise.all(fetchMovies)
-        .then(responses => {
-          // Filtrar y agregar las películas que no están en el estado favorite
-          const newMovies = responses.filter(response => !favorite.some(favMovie => favMovie._id === response._id))
-
-          // Actualizar el estado favorite con las nuevas películas
-          if (newMovies.length > 0) {
-            console.log(newMovies)
-            setFavorite(prevFavorite => [...prevFavorite, ...newMovies])
-          }
-        })
-        .catch(error => {
-          console.error(error)
-        })
+      listFavoriteMovies?.movies?.forEach((movieId) => {
+        consultMovie(movieId)
+      })
     }
-  }, [listFavoriteMovies, favorite])
+  }, [listFavoriteMovies])
+
+  useEffect(() => {
+    const uniqueFavoriteMovies = Array.from(new Set(favorite.map(movie => movie._id))).map(id => favorite.find(movie => movie._id === id))
+    setListMovies(uniqueFavoriteMovies)
+  }, [favorite])
 
   return (
     <div className='dropdown' id='Container-dropdown-menu-favorites'>
@@ -44,7 +41,7 @@ const DropdownFavorites = () => {
       </button>
       <ul className='dropdown-menu' aria-labelledby='dropdownMenuFavorites'>
         {
-          favorite && favorite.map((movie) => (
+          listMovies && listMovies?.map((movie) => (
             <li key={movie?._id}>
               <Link to=''>
                 <div className='container-favorite-movie'>

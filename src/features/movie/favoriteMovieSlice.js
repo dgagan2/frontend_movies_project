@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import favoriteMovieService from './favoriteMovieService'
 
 const initialState = {
-  listFavoriteMovies: null,
+  listFavoriteMovies: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
