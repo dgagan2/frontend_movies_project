@@ -3,18 +3,26 @@ import ReactPlayer from 'react-player'
 import NavHeader from '../../components/header/Header'
 import Spinner from '../../components/Spinner'
 import { toast } from 'react-toastify'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './movieDetails.css'
+import { newFavoriteMovie } from '../../features/movie/favoriteMovieSlice'
 
 const Movie = () => {
-  const { movieDetail, isLoading, message } = useSelector((state) => state.movie)
-
-  useEffect(() => { toast.info(message.message || message) }, [message])
+  const { movieDetail, isLoading, message, isError } = useSelector((state) => state.movie)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if (message) {
+      toast.info(message.message || message)
+    }
+  }, [isError, message])
 
   if (isLoading) {
     return <Spinner />
   }
-  console.log(movieDetail)
+
+  const addToList = (data) => {
+    dispatch(newFavoriteMovie(data))
+  }
   return (
     <>
       <NavHeader />
@@ -41,7 +49,7 @@ const Movie = () => {
                   <footer>
                     {movieDetail?.releaseDate && <p>{movieDetail?.releaseDate}</p>}
 
-                    <button>Ver mas tarde</button>
+                    <button onClick={() => { addToList(movieDetail) }}>Ver mas tarde</button>
                   </footer>
                 </div>
               </div>

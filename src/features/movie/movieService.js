@@ -37,8 +37,13 @@ const getAllMovies = async () => {
   return response.data
 }
 
-const searchMovieByName = async () => {
-  const response = await axios.get(`${VITE_API_URL}/movies/search`, getToken())
+const searchMovieByName = async (title) => {
+  const response = await axios.get(`${VITE_API_URL}/movies/search?title=${title}`, getToken())
+  return response.data
+}
+
+const searchMovieByGenre = async (genre) => {
+  const response = await axios.get(`${VITE_API_URL}/movies/search?genre=${genre}`, getToken())
   return response.data
 }
 
@@ -83,6 +88,7 @@ const movieService = {
   searchMovieByDate,
   searchMoviesById,
   getAllMovies,
+  searchMovieByGenre,
   getLatestMovies,
   getPremiereMovies,
   getBillboardMovies,

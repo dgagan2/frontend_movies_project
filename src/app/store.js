@@ -5,6 +5,7 @@ import modalReduce from '../features/modals/modalSlice'
 import rolesReducer from '../features/roles/roleSlice'
 import movieReducer from '../features/movie/movieSlice'
 import genreReducer from '../features/genres/genreSlice'
+import favoriteReucer from '../features/movie/favoriteMovieSlice'
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     modalReduce,
     rol: rolesReducer,
     movie: movieReducer,
-    genre: genreReducer
+    genre: genreReducer,
+    favorite: favoriteReucer
   }
 })

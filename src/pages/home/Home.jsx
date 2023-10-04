@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './home.css'
 import PremiereMovies from '../../components/premiere/PremiereMovies'
 import BillboardMovies from '../../components/billboard/BillboardMovies'
 import NavHeader from '../../components/header/Header'
 import HomeMovie from '../../components/homeMovies/HomeMovie'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMovies } from '../../features/movie/movieSlice'
 
 const Home = () => {
+  const dispatch = useDispatch()
+
+  useState(() => {
+    dispatch(getMovies())
+  }, [])
+
   return (
     <>
       <NavHeader />

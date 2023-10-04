@@ -7,6 +7,7 @@ import DashboardAddMovie from '../pages/dashboard/movie/DashboardAddMovie'
 import DashboardUpdateMovie from '../pages/dashboard/movie/DashboardUpdateMovie'
 import DashboardGenre from '../pages/dashboard/genre/DashboardGenre'
 import Movie from '../pages/movieDetails/Movie'
+import MovieSearch from '../pages/dashboard/movie/MovieSearch'
 
 const RoutesIndex = () => {
   return (
@@ -16,8 +17,9 @@ const RoutesIndex = () => {
       <Route path='/dashboard/role' element={<DashboardRole />} />
       <Route path='/dashboard/movie/add' element={<DashboardAddMovie />} />
       <Route path='/dashboard/movie/update' element={<DashboardUpdateMovie />} />
+      <Route path='/home/search' element={<MovieSearch />} />
       <Route path='/dashboard/genre' element={<DashboardGenre />} />
-      <Route path='/prueba' element={<Movie />} />
+      <Route path='/details' element={<Movie />} />
       <Route path='/*' element={<NotFound />} />
     </Routes>
   )

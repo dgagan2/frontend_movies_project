@@ -13,7 +13,7 @@ const PremiereMovies = () => {
   }, [])
   const Details = (movie) => {
     dispatch(getMovieById(movie._id))
-    navigate('/prueba')
+    navigate('/details')
   }
 
   return (

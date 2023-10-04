@@ -83,6 +83,23 @@ export const updateMovie = createAsyncThunk('movie/update', async (data, thunkAP
   }
 })
 
+export const searchHomeMovie = createAsyncThunk('movie/home/search', async (data, thunkAPI) => {
+  const { title, genre } = data
+  try {
+    let response
+    if (title) {
+      response = await movieService.searchMovieByName(title)
+    }
+    if (genre) {
+      response = await movieService.searchMovieByGenre(genre)
+    }
+    return response
+  } catch (error) {
+    const message = error.response.data
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 export const movieSlice = createSlice({
   name: 'movie',
   initialState,
@@ -183,6 +200,19 @@ export const movieSlice = createSlice({
       .addCase(modalClose.fulfilled, (state) => {
         state.isOpen = false
         state.movieUpdate = null
+      })
+      .addCase(searchHomeMovie.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(searchHomeMovie.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.movies = action.payload
+      })
+      .addCase(searchHomeMovie.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload || 'Servicio no disponible, intente más tarde'
       })
   }
 }

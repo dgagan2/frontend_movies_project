@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMovieById, getMovies } from '../../features/movie/movieSlice'
+import { getMovieById } from '../../features/movie/movieSlice'
 import { useNavigate } from 'react-router-dom'
 
 const HomeMovie = () => {
   const { movies } = useSelector((state) => state.movie)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  useEffect(() => {
-    dispatch(getMovies())
-  }, [])
   const Details = (movie) => {
     dispatch(getMovieById(movie._id))
-    navigate('/prueba')
+    navigate('/details')
   }
+
   return (
     <>
       {movies && movies?.map((movie) => (
