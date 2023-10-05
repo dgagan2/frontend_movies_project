@@ -11,13 +11,14 @@ import validateForm from './validateForm'
 
 const AddMovie = () => {
   const [inputErrors, setInputErrors] = useState({})
-  const [genres, setGenres] = useState([])
+  const [localGenres, setLocalGenres] = useState([])
   const [languages, setLanguages] = useState([])
   const [poster, setPoster] = useState(null)
   const [backgroundImage, setBackgroungImage] = useState(null)
 
   const dispatch = useDispatch()
   const { isError, isSuccess, isLoading, message } = useSelector((state) => state.movie)
+  const { genres } = useSelector((state) => state.genre)
 
   useEffect(() => {
     if (isError) {
@@ -31,19 +32,19 @@ const AddMovie = () => {
   }, [message, isSuccess, isError, dispatch])
 
   const sendData = () => {
-    const newErros = validateForm({ ...input, genre: genres, language: languages, posterPath: poster, postBackground: backgroundImage })
+    const newErros = validateForm({ ...input, genre: localGenres, language: languages, posterPath: poster, postBackground: backgroundImage })
     setInputErrors(newErros)
     if (Object.keys(newErros).length === 0) {
-      const data = { ...input, genre: genres, language: languages, posterPath: poster, postBackground: backgroundImage }
+      const data = { ...input, genre: localGenres, language: languages, posterPath: poster, postBackground: backgroundImage }
       dispatch(newMovie(data))
     }
   }
   const handleChangeGenre = (event) => {
     const { value } = event.target
-    if (genres.includes(value)) {
-      setGenres(genres.filter(genre => genre !== value))
+    if (localGenres.includes(value)) {
+      setLocalGenres(localGenres.filter(genre => genre !== value))
     } else {
-      setGenres([...genres, value])
+      setLocalGenres([...localGenres, value])
     }
   }
   const handleChangeLanguage = (event) => {
@@ -73,7 +74,7 @@ const AddMovie = () => {
 
   const clearFields = () => {
     setInput(Default())
-    setGenres('')
+    setLocalGenres('')
     setLanguages('')
     setBackgroungImage(null)
     setInputErrors('')
@@ -104,8 +105,14 @@ const AddMovie = () => {
 
             <div className='col-sm-12'>
               <h6>Seleccione los generos<span className='text-muted'>(Obligatorio)</span></h6>
+              {genres && genres?.map((genre) => (
+                <div className='form-check' key={genre._id}>
+                  <input type='checkbox' checked={!!localGenres.includes(genre?.name)} className='form-check-input' id={genre?.name} value={genre?.name} onChange={(e) => { handleChangeGenre(e) }} />
+                  <label className='form-check-label' htmlFor={genre?.name}>{genre?.name}</label>
+                </div>
+              ))}
               <div className='form-check'>
-                <input type='checkbox' checked={!!genres.includes('comedia')} className='form-check-input' id='comedia' value='comedia' onChange={(e) => { handleChangeGenre(e) }} />
+                <input type='checkbox' checked={!!localGenres.includes('comedia')} className='form-check-input' id='comedia' value='comedia' onChange={(e) => { handleChangeGenre(e) }} />
                 <label className='form-check-label' htmlFor='comedia'>Comedia</label>
               </div>
               {inputErrors.genre && <p className='errores'>{inputErrors.genre}</p>}

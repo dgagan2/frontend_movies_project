@@ -72,7 +72,7 @@ const ModalMovie = () => {
     dispatch(modalClose())
     dispatch(reset())
   }
-  console.log(isBillboard, isPremiere)
+
   return (
     <>
       {isOpen

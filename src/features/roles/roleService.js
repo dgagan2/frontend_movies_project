@@ -31,7 +31,6 @@ const getById = async (id) => {
 }
 
 const deleteRole = async (id) => {
-  console.log(id)
   const response = await axios.delete(`${VITE_API_URL}/role/${id}`, getToken())
   return response.data
 }

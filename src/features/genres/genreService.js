@@ -49,7 +49,6 @@ const deleteGenre = async (id) => {
 }
 
 const updateGenre = async (data) => {
-  console.log('datasenda', data)
   const response = await axios.patch(`${VITE_API_URL}/movies/genre`, data, getToken())
   return response.data
 }

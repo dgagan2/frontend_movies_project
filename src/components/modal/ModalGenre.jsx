@@ -44,7 +44,7 @@ const ModalGenre = () => {
     dispatch(modalClose())
     dispatch(reset())
   }
-  console.log(input)
+
   return (
     <article className={`modal ${isOpen ? 'is-open' : ''}`}>
       <div className='modal-dialog modal-dialog-scrollable'>
