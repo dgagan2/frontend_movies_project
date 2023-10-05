@@ -1,24 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import iconFavoritesMovies from '../../assets/favorito.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getFavoriteMovies } from '../../features/movie/favoriteMovieSlice'
 import movieService from '../../features/movie/movieService'
+import { getMovieById } from '../../features/movie/movieSlice'
 
 const DropdownFavorites = () => {
   const [favorite, setFavorite] = useState([])
   const [listMovies, setListMovies] = useState([])
 
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const { listFavoriteMovies } = useSelector((state) => state.favorite)
 
   useEffect(() => {
     dispatch(getFavoriteMovies())
     if (listFavoriteMovies) {
       const consultMovie = async (movieId) => {
-        // Verificar si la película ya está en el estado 'favorite' antes de consultarla
         const response = await movieService.searchMoviesById(movieId)
         setFavorite((prevFavorites) => [...prevFavorites, response])
       }
@@ -34,6 +34,10 @@ const DropdownFavorites = () => {
     setListMovies(uniqueFavoriteMovies)
   }, [favorite])
 
+  const Details = (movie) => {
+    dispatch(getMovieById(movie))
+    navigate('/details')
+  }
   return (
     <div className='dropdown' id='Container-dropdown-menu-favorites'>
       <button type='button' className='btn btn-link dropdown-toggle' data-bs-toggle='dropdown' id='dropdownMenuFavorites' aria-expanded='false'>
@@ -43,7 +47,7 @@ const DropdownFavorites = () => {
         {
           listMovies && listMovies?.map((movie) => (
             <li key={movie?._id}>
-              <Link to=''>
+              <Link onClick={() => { Details(movie._id) }}>
                 <div className='container-favorite-movie'>
                   <img src={movie?.posterPath} alt='' className='image-favorite-movie' />
                   <div className='container-favorite-movie-data'>
