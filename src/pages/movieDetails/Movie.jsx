@@ -14,6 +14,9 @@ const Movie = () => {
     if (message) {
       toast.info(message.message || message)
     }
+    if (isError) {
+      toast.error(message.message || message)
+    }
   }, [isError, message])
 
   if (isLoading) {
@@ -23,6 +26,7 @@ const Movie = () => {
   const addToList = (data) => {
     dispatch(newFavoriteMovie(data))
   }
+
   return (
     <>
       <NavHeader />
@@ -30,11 +34,11 @@ const Movie = () => {
         <section className='container-movie' key={movieDetail?._id}>
           <article className='p-4'>
             <div
-              className='container-movie-details' style={{
+              className='container-background-movie-description' style={{
                 backgroundImage: `url(${movieDetail?.postBackground})`
               }}
             >
-              <div className='d-flex gap-4 p-3'>
+              <div className='container-movie-details-data d-flex gap-4 p-3'>
                 <div className='container-movie-poster-details'>
                   <img src={movieDetail?.posterPath} alt={`Poster pelicula ${movieDetail?.title}`} id='movie-poster-details' />
                 </div>
@@ -49,27 +53,27 @@ const Movie = () => {
                   <footer>
                     {movieDetail?.releaseDate && <p>{movieDetail?.releaseDate}</p>}
 
-                    <button onClick={() => { addToList(movieDetail) }}>Ver mas tarde</button>
+                    <button className='btn btn-primary btn-md' onClick={() => { addToList(movieDetail) }}>Ver mas tarde</button>
                   </footer>
                 </div>
               </div>
             </div>
 
           </article>
-          <article>
+          <article className='film-video-container p-4'>
             <div className='player-wrapper'>
               <ReactPlayer
                 className='react-player'
                 url={movieDetail?.videoLink}
+                width='100%'
+                height='100%'
                 controls
-                volume
-                playIcon
               />
             </div>
           </article>
-          <article>
+          <article className='container-details-movie p-4'>
             {movieDetail?.director && <p>Director: {movieDetail?.director}</p>}
-            {movieDetail?.actors && <p>Actores: {movieDetail?.actors}</p>}
+            {movieDetail?.actors?.length !== 0 ? <p>Actores: {movieDetail?.actors}</p> : ''}
             {movieDetail?.genre && <p>Genero: {movieDetail?.genre}</p>}
             {movieDetail?.language && <p>Lenguaje: {movieDetail?.language}</p>}
           </article>

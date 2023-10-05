@@ -122,7 +122,7 @@ const AddMovie = () => {
 
             <div className='col-sm-6'>
               <label htmlFor='movieDuration' className='form-label'>Duración de la pelicula</label>
-              <input type='time' id='movieDuration' className='form-control' max='04:00:00' name='movieDuration' onChange={handleInputChange} required />
+              <input type='text' id='movieDuration' className='form-control' name='movieDuration' onChange={handleInputChange} required />
             </div>
 
             <div className='col-sm-6'>

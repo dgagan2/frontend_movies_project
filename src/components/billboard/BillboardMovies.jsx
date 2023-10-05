@@ -1,20 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMoviesBillboard } from '../../features/movie/movieSlice'
+import { getMovieById, getMoviesBillboard } from '../../features/movie/movieSlice'
 import './billboard.css'
+import { useNavigate } from 'react-router-dom'
 
 const BillboardMovies = () => {
   const { moviesBillboard } = useSelector((state) => state.movie)
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getMoviesBillboard())
-  }, [])
-
+  const navigate = useNavigate()
+  const Details = (movie) => {
+    dispatch(getMovieById(movie._id))
+    navigate('/details')
+  }
   return (
 
     <Carousel>
@@ -28,7 +29,7 @@ const BillboardMovies = () => {
               <span key={index}>{genre}</span>
             ))}
             </p>
-            <button className='w-150 btn btn-primary btn-lg'>Ver Pelicula</button>
+            <button className='btn btn-primary btn-md' onClick={() => { Details(data) }}>Ver Pelicula</button>
           </div>
         </div>
       ))}

@@ -23,6 +23,7 @@
     padding-left: 20px !important;
     font-family: 'Montserrat',sans-serif;
     opacity: 100%;
+    overflow: scroll;
 
 }
 .carousel .carousel-status{

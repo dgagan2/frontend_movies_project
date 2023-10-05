@@ -12,25 +12,27 @@ const MovieSearch = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   useEffect(() => {
+    if (isError) {
+      toast.info(message.message || message)
+    }
     if (message) {
       navigate('/home')
     }
+
     dispatch(reset())
   }, [isError, message])
-  console.log(isLoading)
+
+  if (isLoading) {
+    return <Spinner />
+  }
   return (
     <>
-      {isLoading
-        ? <Spinner />
-        : (
-          <>
-            <NavHeader />
-            <HomeMovie />
-          </>
+      <NavHeader />
+      <section className='container-home-movies d-flex flex-row justify-content-center flex-wrap gap-4'>
+        <HomeMovie />
+      </section>
 
-          )}
     </>
-
   )
 }
 

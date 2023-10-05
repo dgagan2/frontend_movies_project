@@ -8,9 +8,9 @@ const PremiereMovies = () => {
   const { moviesPremiere } = useSelector((state) => state.movie)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  useEffect(() => {
-    dispatch(getMoviesPremiere())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getMoviesPremiere())
+  // }, [])
   const Details = (movie) => {
     dispatch(getMovieById(movie._id))
     navigate('/details')
@@ -19,7 +19,7 @@ const PremiereMovies = () => {
   return (
     <>
       <article className='container-premiere-movies'>
-        <ul className='d-flex gap-4 flex-wrap'>
+        <ul className='d-flex gap-3 flex-wrap justify-content-around'>
           {moviesPremiere && moviesPremiere.map((data) => (
             <li key={data?._id}>
               <div className='container-premiere-images'>
