@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import './movieDetails.css'
 import { newFavoriteMovie } from '../../features/movie/favoriteMovieSlice'
+import Like from '../../components/Like'
 
 const Movie = () => {
   const { movieDetail, isLoading, message, isError } = useSelector((state) => state.movie)
@@ -54,6 +55,7 @@ const Movie = () => {
                     {movieDetail?.releaseDate && <p>{movieDetail?.releaseDate}</p>}
 
                     <button className='btn btn-primary btn-md' onClick={() => { addToList(movieDetail) }}>Ver mas tarde</button>
+                    <Like id={movieDetail?._id} />
                   </footer>
                 </div>
               </div>

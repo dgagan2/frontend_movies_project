@@ -29,13 +29,28 @@
 .player-wrapper {
     position: relative;
     padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
-  }
+}
   
-  .react-player {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+.react-player {
+position: absolute;
+top: 0;
+left: 0;
+}
+
+.button-like-movie{
+    margin-left: 10px;
+ background-color: transparent;
+ border-style: none;
+}
+
+.button-like-movie img{
+    width: 30px;
+    filter: grayscale(1);
+}
+
+.button-like-movie.islike img{
+    filter: grayscale(0);
+}
 
 @media (max-width: 850px){
     .container-movie-details-data{

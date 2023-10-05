@@ -6,7 +6,7 @@ import rolesReducer from '../features/roles/roleSlice'
 import movieReducer from '../features/movie/movieSlice'
 import genreReducer from '../features/genres/genreSlice'
 import favoriteReucer from '../features/movie/favoriteMovieSlice'
-
+import likeReducer from '../features/movie/likeSlice'
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -15,6 +15,7 @@ export const store = configureStore({
     rol: rolesReducer,
     movie: movieReducer,
     genre: genreReducer,
-    favorite: favoriteReucer
+    favorite: favoriteReucer,
+    likeMovie: likeReducer
   }
 })
