@@ -1,24 +1,16 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getMovieById } from '../../features/movie/movieSlice'
-import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import HoverPlayMovie from '../HoverPlayMovie'
+import '../premiere/premiere.css'
 
 const HomeMovie = () => {
   const { movies } = useSelector((state) => state.movie)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const Details = (movie) => {
-    dispatch(getMovieById(movie._id))
-    navigate('/details')
-  }
 
   return (
     <>
       {movies && movies?.map((movie) => (
         <div key={movie._id} className='container-list-movies-home'>
-          <button onClick={() => { Details(movie) }}>
-            <img src={movie.posterPath} alt={`Poster pelicula ${movie.title}`} />
-          </button>
+          <HoverPlayMovie movie={movie} />
         </div>
       ))}
 
