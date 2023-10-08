@@ -12,6 +12,7 @@ const ModalUser = () => {
   const [errorInput, setErrorInput] = useState({})
   const { isOpen, id } = useSelector((state) => state.modalReduce)
   const { searchedUser, isSuccessUpdate } = useSelector((state) => state.users)
+  const { roles } = useSelector((state) => state.rol)
   const dispatch = useDispatch()
   const sendData = () => {
     const newErros = validateFormUpdateUSer(input)
@@ -65,6 +66,7 @@ const ModalUser = () => {
     dispatch(modalClose())
     dispatch(reset())
   }
+
   return (
     <article className={`modal ${isOpen ? 'is-open' : ''}`}>
       <div className='modal-dialog modal-dialog-scrollable'>
@@ -95,10 +97,12 @@ const ModalUser = () => {
             <label className='form-label' htmlFor=''>
               Role
             </label>
-            <select id='state' className='form-select' name='state'>
-              <option value='active'>Habilitado</option>
-              <option value='disabled'>Deshabilitado</option>
+            <select id='state' className='form-select' name='role' value={input?.role} onChange={handleInputChange}>
+              {roles && roles.map((role) => (
+                <option key={role._id} value={role.name}>{role.name}</option>
+              ))}
             </select>
+
           </div>
           <div className='col-sm-6'>
             <label className='form-label' htmlFor=''>

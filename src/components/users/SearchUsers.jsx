@@ -10,10 +10,11 @@ import Spinner from '../Spinner'
 import iconDeleteUser from '../../assets/iconDelete.png'
 import iconEditUser from '../../assets/iconEdit.png'
 import { modalOpen } from '../../features/modals/modalSlice'
+import { roleList } from '../../features/roles/roleSlice'
 
 const SearchUsers = () => {
   const [optionSearch, setOptionSearch] = useState('email')
-  const [roleSelected, setRoleSelected] = useState('customer')
+  const [roleSelected, setRoleSelected] = useState('')
   const [stateSelected, setStateSelected] = useState('active')
   const [dataEmail, setDataEmail] = useState('')
   const navigate = useNavigate()
@@ -22,9 +23,10 @@ const SearchUsers = () => {
   const skip = 0
 
   const { users, isLoading, isError, isSuccess, message } = useSelector((state) => state.users)
-
+  const { roles } = useSelector((state) => state.rol)
   useEffect(() => {
     dispatch(userList({ limit, skip }))
+    dispatch(roleList())
   }, [isSuccess])
 
   useEffect(() => {
@@ -41,9 +43,10 @@ const SearchUsers = () => {
     if (optionSearch === 'role') {
       return (
               <select id='role' className='form-select' name='role' onChange={(e) => { setRoleSelected(e.target.value) }}>
-                      <option value='customer'>Customer</option>
-                      <option value='admin'>Admin</option>
-
+                <option value=''>Seleccione...</option>
+                 {roles && roles.map((role) => (
+                    <option key={role._id} value={role.name}>{role.name}</option>
+                 ))}
               </select>
       )
     }
@@ -74,6 +77,7 @@ const SearchUsers = () => {
         dispatch(searchUserState(stateSelected))
         break
     }
+    setOptionSearch('email')
   }
 
   const deleteUserById = (id) => {
@@ -87,7 +91,7 @@ const SearchUsers = () => {
   }
   const resetFields = () => {
     setOptionSearch('email')
-    setRoleSelected('customer')
+    setRoleSelected('')
     setStateSelected('active')
     dispatch(userList({ limit, skip }))
   }
