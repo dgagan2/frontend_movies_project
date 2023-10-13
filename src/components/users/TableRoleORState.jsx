@@ -14,7 +14,6 @@ const TableRoleORState = ({ nameModule }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     if (nameModule === 'Rol') {
-      console.log('entro')
       setDataToRender(roles)
     }
     if (nameModule === 'Estado') {
@@ -40,7 +39,7 @@ const TableRoleORState = ({ nameModule }) => {
   }
 
   return (
-    <div className='container-role-list'>
+    <div className='container-state-list'>
       <div className='table-responsive'>
         <table className='table align-middle'>
           <thead>

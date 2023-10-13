@@ -54,7 +54,7 @@ const ModalState = () => {
         <form className='needs-validation' onSubmit={handleSubmit}>
           <div className='col-sm-6'>
             <label className='form-label' htmlFor='firstname'>
-              Nombre del Estadi
+              Nombre del Estado
             </label>
             <input className='form-control' type='text' id='name' name='name' value={input?.name} onChange={handleInputChange} />
           </div>

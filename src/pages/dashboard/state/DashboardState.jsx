@@ -2,7 +2,6 @@ import React from 'react'
 import MenuDashboard from '../../../components/menuDashboard/MenuDashboard'
 import NavHeader from '../../../components/header/Header'
 import '../dashboard.css'
-import ModalRole from '../../../components/modal/ModalRole'
 import ManagerState from '../../../components/state/ManagerState'
 import ModalState from '../../../components/modal/ModalState'
 
