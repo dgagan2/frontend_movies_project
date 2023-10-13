@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import Spinner from '../Spinner'
 import { useSelector, useDispatch } from 'react-redux'
-import { roleList, reset } from '../../features/roles/roleSlice'
 import { toast } from 'react-toastify'
 import FormRoleORState from '../users/FormRoleORState'
+import { resetState, stateList } from '../../features/state/stateSlice'
 
-const AddRole = () => {
+const ManagerState = () => {
   const dispatch = useDispatch()
-  const { isLoading, isError, isSuccess, message, isSuccessUpdateRole } = useSelector((state) => state.rol)
+  const { isLoading, isError, isSuccess, message, isSuccessUpdateRole } = useSelector((state) => state.state)
   const updateList = () => {
-    dispatch(roleList())
+    dispatch(stateList())
   }
   useEffect(() => {
     updateList()
@@ -24,7 +24,7 @@ const AddRole = () => {
       message && toast.success(message)
     }
 
-    dispatch(reset())
+    dispatch(resetState())
   }, [isError, isSuccess, message, dispatch])
 
   if (isLoading) {
@@ -35,7 +35,7 @@ const AddRole = () => {
     <>
       <article>
         <div className='container-form-role'>
-          <FormRoleORState nameModule='Rol' />
+          <FormRoleORState nameModule='Estado' />
         </div>
       </article>
 
@@ -43,4 +43,4 @@ const AddRole = () => {
   )
 }
 
-export default AddRole
+export default ManagerState

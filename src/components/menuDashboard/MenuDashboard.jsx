@@ -23,7 +23,7 @@ const MenuDashboard = () => {
             </div>
             <div id='collapseOne' className='accordion-collapse collapse' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
               <div className='accordion-body'>
-                <Link className='w-100' id='accordion-button-item'>Estados</Link>
+                <Link className='w-100' id='accordion-button-item' to='/dashboard/state'>Estados</Link>
               </div>
             </div>
           </div>

@@ -7,6 +7,8 @@ import movieReducer from '../features/movie/movieSlice'
 import genreReducer from '../features/genres/genreSlice'
 import favoriteReucer from '../features/movie/favoriteMovieSlice'
 import likeReducer from '../features/movie/likeSlice'
+import stateReducer from '../features/state/stateSlice'
+
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -16,6 +18,7 @@ export const store = configureStore({
     movie: movieReducer,
     genre: genreReducer,
     favorite: favoriteReucer,
-    likeMovie: likeReducer
+    likeMovie: likeReducer,
+    state: stateReducer
   }
 })
