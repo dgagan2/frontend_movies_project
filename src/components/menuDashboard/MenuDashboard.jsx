@@ -56,11 +56,6 @@ const MenuDashboard = () => {
                 <Link className='w-100' id='accordion-button-item' to='/dashboard/genre'>Genero</Link>
               </div>
             </div>
-            <div id='collapseThree' className='accordion-collapse collapse' aria-labelledby='headingThree' data-bs-parent='#accordionExample'>
-              <div className='accordion-body'>
-                <Link className='w-100' id='accordion-button-item' to='/dashboard/languages'>Lenguaje</Link>
-              </div>
-            </div>
           </div>
         </div>
       </article>

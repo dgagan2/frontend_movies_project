@@ -26,7 +26,6 @@ const DropdownMenuUser = () => {
         {user?.role === 'admin'
           ? <li><Link className='dropdown-item' to='/dashboard'>Dashboard</Link></li>
           : null}
-        <li><Link className='dropdown-item' to='/profile'>Mi perfil</Link></li>
         <li><button className='dropdown-item' onClick={onLogout}>Salir</button></li>
       </ul>
     </div>
