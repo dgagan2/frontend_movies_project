@@ -1,4 +1,32 @@
 body{
     background: #cbcbcb !important;
     font-family: 'Mooli', sans-serif;
+    list-style: none;
+}
+.container-home-movies{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 330px;
+}
+.container-home-movies ul{
+    list-style: none;
+}
+.carousel-root{
+    width: 90%;
+}
+.container-list-movies-home img{
+    object-fit: cover;
+    height: 265px;
+    width: 200px;
+}
+.container-list-movies-home button{
+    border-style: none;
+}
+
+
+@media (max-width: 992px){
+    .container-home-movies{
+        display: flex;
+        margin: 30px 50px;
+    }
 }

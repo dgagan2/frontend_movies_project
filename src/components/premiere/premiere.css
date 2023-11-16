@@ -1,0 +1,45 @@
+.container-premiere-movies img{
+    height: 200px;
+}
+.container-premiere-images .premiere-image{
+    object-fit: cover;
+    height: 220px;
+    width: 165px;
+    
+}
+
+
+.container-premiere-images button{
+    border-style: none;
+    border-radius: 10px;
+}
+
+.container-premiere-movies ul{
+    padding: 31px;
+    margin: 0px;
+    align-content: center;
+    justify-content: center !important;
+}
+
+.btn-premiere-image{
+    position: relative;
+}
+.btn-premiere-image .icon-play-premiere-movie{
+    position: absolute;
+    bottom: 27%;
+    left: 17%;
+    right: 0px;
+    height: 90px;
+    object-fit: contain;
+    transition: .3s ease;
+    opacity: 0;
+}
+
+.btn-premiere-image:hover img:first-child{
+    opacity: 1;
+}
+
+.container-list-movies-home .icon-play-premiere-movie{
+    left: 0px;
+    bottom: 34%;
+}

@@ -1,0 +1,67 @@
+.container-movie{
+    width: 60%;
+    margin: 25px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.container-movie{
+    color: white;
+}
+
+.conatiner-movie-description{
+    background-color: #00000052;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+#movie-poster-details{
+    border-radius: 15px;
+    object-fit: cover;
+    height: 265px;
+    width: 200px;
+}
+.container-details-movie{
+    background-color: #10104e;
+    margin: 0px 25px 25px 25px;
+    border-radius: 20px;
+}
+.player-wrapper {
+    position: relative;
+    padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
+  
+.react-player {
+position: absolute;
+top: 0;
+left: 0;
+}
+
+.button-like-movie{
+    margin-left: 10px;
+ background-color: transparent;
+ border-style: none;
+}
+
+.button-like-movie img{
+    width: 30px;
+    filter: grayscale(1);
+}
+
+.button-like-movie.islike img{
+    filter: grayscale(0);
+}
+
+@media (max-width: 850px){
+    .container-movie-details-data{
+        flex-direction: column;
+    }
+    .container-movie-poster-details{
+        display: flex;
+    justify-content: center;
+    }
+    .container-movie{
+        margin: 75px;
+
+    }
+}

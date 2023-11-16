@@ -2,6 +2,7 @@
     background-color: #10104e;
     height: 72px;
 }
+
 .logo-navbar{
     width: 50px;
 }
@@ -22,6 +23,18 @@
 /* Estilos menu  dropdown usuario */
 #dropdownMenuUser {
     background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+    border-style: none;
+}
+#dropdownMenuUser img{
+    width: 35px;
+}
+#dropdown{
+    margin-left: 10px;
+}
+.dropdown-item.disabled{
+    color: black !important;
 }
 /* Estilos menu  dropdown peliulas favorias */
 #dropdownMenuFavorites {
@@ -32,20 +45,26 @@
 }
 
 .button-search img, #dropdownMenuFavorites img{
-    width: 30px;
+    width: 34px;
 }
 
-#dropdownMenuFavorites img{
+#dropdownMenuFavorites img, #dropdownMenuUser img{
     padding-top: 4px;
+    filter: invert(1);
 }
 
 #Container-dropdown-menu-favorites ul{
-    width: max-content;
+    width: 270px;
     padding: 0px;
     background-color: transparent;
     border-style: none;
 }
-
+#Container-dropdown-menu-favorites button{
+    border-style: none;
+}
+#Container-dropdown-menu-favorites h4{
+    font-size: 15px;
+}
 #Container-dropdown-menu-favorites li{
     padding: 0px 10px;
     border-style: groove;
@@ -63,7 +82,7 @@
     flex-direction: row;
     gap: 10px;
     align-items: center;
-    max-height: 105px;
+    height: auto;
     margin: 5px 2px;
 }
 .container-favorite-movie .image-favorite-movie{
@@ -77,10 +96,40 @@
     padding: 0px;
     margin: 0px;
 }
+.container-favorite-movie-data, .dropdown-menu button {
+    width: -webkit-fill-available;
+}
+
 @media (min-width: 992px){
     .navbar{
         padding: 0px 150px 0px 150px;
     }
-    
+    .container-home-movies{
+        margin: 30px 100px;
+    }
+    .dropdown-menu.show{
+        right: 0 !important;
+        left: auto !important;
+    }
+}
+@media (min-width: 768px){
+    .dropdown-menu.show{
+        right: 0 !important;
+        left: auto !important;
+    }
+}
+@media (min-width: 1348px){
+    .container-home-movies{
+        margin: 30px 250px;
+    }
+    .container-carousel-billboard{
+        margin: 0px 60px;
+    }
+}
+
+@media (max-width: 992px){
+    #container-dropdown-user-movies{
+        margin: 15px;
+    }
     
 }

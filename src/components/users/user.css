@@ -1,0 +1,22 @@
+.container-form-search-user, .container-list-users, .container-form-role, .container-role-list, .container-state-list{
+    margin: 30px 130px;
+}
+
+.container-users{
+    width: -webkit-fill-available;
+}
+
+.table img{
+    width: 22px;
+}
+
+.table button{
+    background-color: transparent;
+    border-style: none;
+}
+
+@media (min-width: 576px){
+    .container-form-search-user, .container-list-users, .container-form-role, .container-role-list, .container-state-list{
+        margin: 30px 80px;
+    }
+}

@@ -1,0 +1,31 @@
+#container-menu-dashboard{
+    width: 280px;
+    height: 100vh;
+    flex-direction: column;
+}
+#container-menu-dashboard #accordion-button-item{
+    border-style: none;
+    padding: 6px;
+    text-decoration: none;
+    color: black;
+}
+.accordion-collapse{
+    background-color: rgba(110, 107, 107, 0.423);
+}
+#container-menu-dashboard .accordion-body{
+    text-align: center;
+    padding: 10px;
+   
+}
+
+#container-menu-dashboard #collapseOne, #container-menu-dashboard #collapseTwo {
+    border-block: inherit;
+    
+}
+#container-menu-dashboard .accordion{
+    --bs-accordion-active-bg:#10104e; 
+    --bs-accordion-active-color:white; 
+    --bs-accordion-btn-icon: transparent;
+    --bs-accordion-btn-active-icon:transparent;
+}
+

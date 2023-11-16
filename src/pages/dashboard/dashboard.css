@@ -1,0 +1,22 @@
+.container-dashboard.modal-active{
+    overflow: hidden;
+}
+
+.container-dashboard{
+    height: fit-content;
+}
+.button-form-search-role img, .button-form-search-genre img{
+    width: 30px;
+}
+
+.button-form-search-role, .button-form-search-genre{
+    background-color: transparent;
+    border-style: none;
+}
+.errores{
+    color: red;
+}
+
+.container-genre{
+    margin: 30px 30px;
+}

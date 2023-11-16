@@ -11,8 +11,7 @@ const initialState = {
 
 export const categoriesNavbar = createAsyncThunk('category/menu', async (thunkAPI) => {
   try {
-    const response = await categoryService.getAllCategories()
-    console.log(response)
+    const response = await categoryService.getMenuCategories()
     return response
   } catch (error) {
     const message = error.response.data
@@ -45,7 +44,7 @@ export const categorySlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload || 'Servicio no disponible, intente más tarde'
-        state.user = null
+        state.categories = null
       })
   }
 })

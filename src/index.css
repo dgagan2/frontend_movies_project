@@ -18,3 +18,43 @@ body{
     display: flex;
     align-items: center;
 }
+
+@media (max-width: 992px){
+  #container-menu-dashboard{
+      width: auto;
+      height: auto;
+  }
+  .header-navbar{
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+  .accordion{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  .container-dashboard{
+    flex-direction: column !important;
+    position: absolute;
+    z-index: 1;
+    top: 72px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .container-home-movies{
+    position: absolute;
+    z-index: 1;
+    top: 72px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .container-form-search-user {
+    margin: 30px 50px;
+} 
+
+}
