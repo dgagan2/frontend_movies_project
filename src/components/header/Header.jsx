@@ -39,9 +39,9 @@ const NavHeader = () => {
           <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarTogglerDemo02' aria-controls='navbarTogglerDemo02' aria-expanded='false' aria-label='Toggle navigation'>
             <span className='navbar-toggler-icon' />
           </button>
-          <a href='/home' style={{ backgroundColor: 'transparent', borderStyle: 'none' }}>
+          <Link to='/home' style={{ backgroundColor: 'transparent', borderStyle: 'none' }}>
             <img className='logo-navbar' alt='Oura movies logo' src={logo} />
-          </a>
+          </Link>
 
           <div className='collapse navbar-collapse' id='navbarTogglerDemo02'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>

@@ -14,6 +14,7 @@ const RoutesIndex = () => {
   return (
     <Routes>
       <Route path='/home' element={<Home />} />
+      <Route path='/' element={<Home />} />
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/dashboard/role' element={<DashboardRole />} />
       <Route path='/dashboard/state' element={<DashboardState />} />
