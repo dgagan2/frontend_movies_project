@@ -27,6 +27,7 @@ function App () {
           ? <RoutesIndex />
           : (
             <Routes>
+              <Route path='/' element={<Login />} />
               <Route path='/login' element={<Login />} />
               <Route path='/account/registration' element={<SignUp />} />
               <Route path='/account/forgotpassword' element={<ForgotPassword />} />
